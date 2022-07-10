@@ -1,9 +1,10 @@
 import os
-from flask import Flask
+from flask import Flask, redirect, request
 from flask_restful import Resource, Api, reqparse
 from flask import render_template
 
 from flask import Flask, session
+from sqlalchemy import select
 
 from config import config
 from models import db
@@ -41,24 +42,50 @@ def index():
 def login():
     return render_template('login.html', title='Login')
 
+@app.route('/admin')
+def admin():
+    usuarios = Usuario.query.all()
+    usuarios_json = [usuario.to_json() for usuario in usuarios]
+    print(usuarios_json)
+    return render_template('admin-index.html', title='Admin', datos=usuarios_json)
+
+@app.route('/login-error')
+def loginError():
+    session.clear()
+    #session['usuario'] = None
+    #session['password'] = None
+    #session['role'] = None
+    return "Error de login"
+
 @app.route('/nuevo-usuario')
 def nuevoUsuario():
-    if (session['role'] == 'admin') {
-        return render_template('nuevo-usuario.html', title='Nuevo usuario')
-    }
-    
+    if session['role'] == 'admin':
+        pass #return render_template('nuevo-usuario.html', title='Nuevo usuario')
+    return render_template('nuevo-usuario.html', title='Nuevo usuario')
+
+#@app.before_request
+def valida_session():
+    ruta = request.path
+    print(ruta)
+    if ruta != '/login' and ruta != '/login-error' and not ruta.startswith("/css") and not ruta.startswith("/images"):
+        print('valida session')
+        #if 'usuario' not in session or 'password' not in session:
+        #    return redirect("/login-error")
 
 # API Resources
 class Autenticacion(Resource):
     def post(self):
         args = parser_usuario.parse_args()
-        session['user'] = args['user']
-        session['password'] = args['password']
-        session['role'] = 'admin'
-
-        print(session)
-        response = {'usuarios_info': {}}, 201
-        return response
+        usuario = args['user']
+        password = args['password']
+        loginInfo = Usuario.query.filter_by(cedula=usuario, password=password).first()
+        if loginInfo:
+            session['usuario'] = args['user']
+            session['password'] = args['password']
+            session['role'] = 'admin'
+            return redirect("/admin")
+        else:
+            return redirect("/login-error")
 
 class Usuarios(Resource):
     def get(self):
@@ -78,7 +105,7 @@ class NewUsuario(Resource):
     def post(self):
         args = parser_usuario.parse_args()
         usuario = Usuario(
-            id=args['id'], cedula=args['cedula'],
+            id=args['id'], cedula=args['cedula'], password=args['password'],
             nombre=args['nombre'], apellido=args['apellido'])
         db.session.add(usuario)
         db.session.commit()
@@ -112,7 +139,7 @@ class UpdateUsuario(Resource):
             response = {'usuario_info': usuarios_json}, 201
         return response
 
-api.add_resource(Autenticacion, '/login-auth')
+api.add_resource(Autenticacion, '/autenticacion')
 api.add_resource(Usuarios, '/usuarios/')
 api.add_resource(GetUsuario, '/usuarios/get/<string:usuario_id>')
 api.add_resource(NewUsuario, '/usuarios/new')

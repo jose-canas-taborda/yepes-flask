@@ -7,6 +7,7 @@ class Usuario(db.Model):
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     cedula = db.Column(db.String(10), nullable=False, unique=True) 
+    password = db.Column(db.String(10), nullable=False) 
     nombre = db.Column(db.String(20), nullable=False) 
     apellido = db.Column(db.String(20), nullable=False)
     #created_at = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
