@@ -8,13 +8,12 @@ from models import Usuario
 parser_usuario = reqparse.RequestParser()
 
 # del logeo
-parser_usuario.add_argument('user', location='form', type=str)
+parser_usuario.add_argument('cedula', location='form', type=str)
 parser_usuario.add_argument('password', location='form', type=str)
 
 # de nuevo usuario
 parser_usuario.add_argument('id', location='form', type=str)
 parser_usuario.add_argument('tipoDocumento', location='form', type=str)
-parser_usuario.add_argument('cedula', location='form', type=str)
 parser_usuario.add_argument('nombre', location='form', type=str)
 parser_usuario.add_argument('apellido', location='form', type=str)
 parser_usuario.add_argument('fechaNacimiento', location='form', type=str)
