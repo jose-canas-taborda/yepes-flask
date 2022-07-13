@@ -9,6 +9,12 @@
 	<link rel="stylesheet" type="text/css" href="static/css/media-queries.css">
 	<title>SD Diagnóstico Visual | Administrador-Editar remisor</title>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		function add_paciente(){
+			$.post("/delete/new", { cedulaMedico: "12334", cedulaPaciente: "45456" } );
+		}
+	</script>
 </head>
 <body>
 	<header>
@@ -122,10 +128,10 @@
 				<h1 class="titulo-asiganar-paciente" >Asignar paciente</h1>
 				<div class="campo-documento-paciente">
 					<h2>Documento del paciente</h2>
-					<input class="input-campo_texto" type="text" name="">
+					<input class="input-campo_texto" type="text" name="cedula_paciente" id="cedula_paciente">
 				</div>
 				<div class="position-addbutton add-paciente-button">
-					<button class="boton-sumit" type="submit">AGREGAR PACIENTE</button>
+					<button class="boton-sumit" type="button" onClick="add_paciente();">AGREGAR PACIENTE</button>
 				</div>
 				<div class="position-addbutton-alerta buscador-alert">
 					<div>
@@ -179,7 +185,7 @@
 				</div>
 
 			<div class="add-paciente-button add-btn-remisor">
-				<button class="boton-sumit" type="text" name="password">ACTUALIZAR REMISOR</button>
+				<button class="boton-sumit" type="submit" name="password">ACTUALIZAR REMISOR</button>
 			</div>
 				
 		</section>

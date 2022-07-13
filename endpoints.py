@@ -1,5 +1,5 @@
 from flask import session, redirect
-from models import db
+from models import Relacion, db
 from flask_restful import Resource, reqparse
 
 from models import Usuario
@@ -26,6 +26,9 @@ parser_usuario.add_argument('examen', location='form', type=str)
 parser_usuario.add_argument('fechaExamen', location='form', type=str)
 parser_usuario.add_argument('lectura', location='form', type=str)
 parser_usuario.add_argument('fechaCreacionUsuario', location='form', type=str)
+
+parser_usuario.add_argument('cedulaMedico', location='form', type=str)
+parser_usuario.add_argument('cedulaPaciente', location='form', type=str)
 
 # API Resources
 class Autenticacion(Resource):
@@ -117,3 +120,25 @@ class UpdateUsuario(Resource):
             usuarios_json = usuario.to_json()
             response = {'usuario_info': usuarios_json}, 201
         return response
+
+
+class AgregarRelacion(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        relacion = Relacion(
+            cedulaMedico=args['cedulaMedico'], cedulaPaciente=args['cedulaPaciente'])
+        db.session.add(relacion)
+        db.session.commit()
+
+class AgregarArchivo(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        usuario = Usuario(
+            id=args['id'], tipoDocumento=args['tipoDocumento'], cedula=args['cedula'], 
+            password=args['password'], nombre=args['nombre'], apellido=args['apellido'],
+            fechaNacimiento=args['fechaNacimiento'], direccion=args['direccion'], 
+            telefono=args['telefono'], email1=args['email1'], email2=args['email2'], 
+            rol=args['rol'], examen=args['examen'], fechaExamen=args['fechaExamen'],
+            lectura=args['lectura'])
+        db.session.add(usuario)
+        db.session.commit()

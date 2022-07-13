@@ -40,3 +40,15 @@ class Usuario(db.Model):
             'lectura': self.lectura,
 
         }
+
+class Relacion(db.Model):
+    __tablename__ = 'relaciones'
+    id = db.Column(db.Integer, primary_key=True)
+    cedulaMedico = db.Column(db.String(10), nullable=False, unique=False)
+    cedulaPaciente = db.Column(db.String(10), nullable=False, unique=True)
+
+class Archivos(db.Model):
+    __tablename__ = 'archivos'
+    id = db.Column(db.Integer, primary_key=True)
+    cedulaPaciente = db.Column(db.String(10), nullable=False, unique=True)
+    archivo = db.Column(db.String(250), nullable=True)
