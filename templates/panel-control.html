@@ -14,7 +14,7 @@
 	<header>
 		<div class="nav-principal">
 			<div class="nav-principal_contenedor">
-				<a href="#/logout">Cerrar sesión</a>
+				<a href="/logout">Cerrar sesión</a>
 			</div>
 		</div>
 		<div class="nav-banner">
@@ -64,12 +64,12 @@
 					<div>DOCUMENTO</div>
 					<div>NOMBRES Y APELLIDOS</div>
 				</div>
-				{% for dato in datos %}
+				{% for paciente in pacientes %}
 				<div class="lista-pacientes-contenido-seleccion">
 					<input type="checkbox" class="input-checkbox" name="">
-					<div>{{dato['fechaCreacionUsuario']}}</div>
-					<div>{{dato['cedula']}}</div>
-					<div>{{dato['nombre']}} {{dato['apellido']}}</div>
+					<div>{{paciente['fechaCreacionUsuario']}}</div>
+					<div>{{paciente['cedula']}}</div>
+					<div>{{paciente['nombre']}} {{paciente['apellido']}}</div>
 				</div>
 				{% endfor %}
 				<div class="main-paginacion-examenes">
@@ -115,12 +115,12 @@
 						<div>DOCUMENTO</div>
 						<div>NOMBRES Y APELLIDOS</div>
 					</div>
-					{% for dato in datos %}
+					{% for remisor in remisores %}
 					<div class="lista-pacientes-contenido-seleccion">
 						<input type="checkbox" class="input-checkbox" name="">
-						<div>{{dato['fechaCreacionUsuario']}}</div>
-						<div>{{dato['cedula']}}</div>
-						<div>{{dato['nombre']}} {{dato['apellido']}}</div>
+						<div>{{remisor['fechaCreacionUsuario']}}</div>
+						<div>{{remisor['cedula']}}</div>
+						<div>{{remisor['nombre']}} {{remisor['apellido']}}</div>
 					</div>
 					{% endfor %}
 					<div class="main-paginacion-examenes">

@@ -42,12 +42,12 @@
 	</header>
 
 	<main class="main-contenedor-add-remisor">
-		{% dato in datos %}
 		<form action="usuarios/update" method="post">
 			<section class="grid-main-contenedor-add-remisor">
 				<img src="static/images/img-remisores.png">
 				<div class="form-add-paciente">
 					<div class="grid-form">
+						{% for dato in datos %}
 							<div class="form-campos-datos-personales">
 								<div class="grid-campos-form">
 									<h2>Nombre / Razón social</h2>
@@ -110,6 +110,7 @@
 									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 							</div>
+							{% endfor %}
 					</div>
 
 				</div>
@@ -160,16 +161,16 @@
 					<div>NOMBRES Y APELLIDOS</div>
 					<div>-</div>
 				</div>
-				{% for datos in datos %}
+				<!--
 				<div class="lista-remisores-contenido-seleccion">
-					<div>{{dato['creado']}}</div>
-					<div>{{dato['cedula']}}</div>
-					<div>{{dato['nombre']}} {{dato['apellido']}}</div>
+					<div>dato['creado']</div>
+					<div>dato['cedula']</div>
+					<div>dato['nombre']dato['apellido']</div>
 					<div>
 					<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
 					</div>
 				</div>
-				{% endfor %}
+			-->
 				<div class="main-paginacion-examenes">
 					Paginacion
 				</div>

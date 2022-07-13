@@ -31,15 +31,33 @@ parser_usuario.add_argument('fechaCreacionUsuario', location='form', type=str)
 class Autenticacion(Resource):
     def post(self):
         args = parser_usuario.parse_args()
-        usuario = args['user']
+        cedula = args['cedula']
         password = args['password']
-        loginInfo = Usuario.query.filter_by(cedula=usuario, password=password).first()
+        loginInfo = Usuario.query.filter_by(cedula=cedula, password=password).first()
         if loginInfo:
-            session['usuario'] = args['user']
+            login_json = loginInfo.to_json()
+            session['user'] = args['cedula']
             session['password'] = args['password']
-            session['role'] = 'admin'
-            return redirect("/admin")
+            session['rol'] = login_json['rol']
+            if session['rol'] == 'admin':
+                return redirect("/admin")
+            
+            if session['rol'] == 'lector':
+                return redirect("/medico-lector")
+
+            if session['rol'] == 'medico':
+                return redirect("/medico")
+
+            if session['rol'] == 'paciente':
+                return redirect("/paciente")
+            
+            print("loginInfo:")
+            print(login_json['rol'])
+            print("session:")
+            print(session)
+            
         else:
+            session.clear()
             return redirect("/login-error")
 
 class Usuarios(Resource):

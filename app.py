@@ -1,6 +1,6 @@
 import os
 from flask import Flask, redirect, request, url_for
-from flask_restful import Api
+from flask_restful import Api, reqparse
 from flask import render_template
 
 from flask import Flask, session
@@ -24,6 +24,14 @@ def create_app(enviroment):
 app = create_app(config['development'])
 api = Api(app)
 
+
+parser_logeo = reqparse.RequestParser()
+
+# del logeo
+parser_logeo.add_argument('cedula', location='form', type=str)
+parser_logeo.add_argument('password', location='form', type=str)
+parser_logeo.add_argument('rol', location='form', type=str)
+
 # Templates
 @app.route('/')
 def index():
@@ -35,22 +43,25 @@ def login():
 
 @app.route('/login', methods=["POST"])
 def login():
-    if request.method == "POST":
-        cedula = request.form['cedula']
-        rol = request.form['rol']
+    """if request.method == "POST":
+        args = parser_logeo.parse_args()
+        cedula = args['cedula']
+        password = args['password']
+        rol = args['rol']
         session['user'] = cedula
         session['rol'] = rol
         return redirect(url_for('admin'))
     else:
         return "No tiene Permiso, favor verificar datos"
+    """
+    pass
 
 @app.route('/admin')
 def admin():
     if 'user' in session and session['rol'] == "admin":
-        usuarios = Usuario.query.all()
-        usuarios_json = [usuario.to_json() for usuario in usuarios]
-        print(usuarios_json)
-        return render_template('panel-control.html', title='Admin', datos=usuarios_json)
+        remisores = Usuario.query.filter_by(rol='medico').all()
+        pacientes = Usuario.query.filter_by(rol='paciente').all()
+        return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
     else:
         return "No tiene Permisos para acceder aquí"
 
@@ -121,7 +132,8 @@ def vistapaciente():
 @app.route('/editar-medico')
 def updatemedico():
     if 'user' in session and session['rol'] == "admin":
-        return render_template('admineditarmedico.html',title='Editar Medico')
+        datos_medico = Usuario.query.filter_by(cedula=session['user']).all()
+        return render_template('admineditarmedico.html',title='Editar Medico', datos=datos_medico)
     else:
         return "No tiene Permisos para acceder aquí"
 
