@@ -38,76 +38,78 @@
 	<main class="main-contenedor-add-paciente">
 		<section class="grid-main-contenedor-add-paciente">
 			<img src="static/images/img-pacientes.png">
-			<section class="form-add-paciente">
-				<div class="grid-form">
-						<div class="form-campos-datos-personales">
-							<div>
-								<h2>Nombre</h2>
-								<input class="input-campo_texto" type="text" name="user">
+			<form action="usuarios/new" method="post">
+				<section class="form-add-paciente">
+					<div class="grid-form">
+							<div class="form-campos-datos-personales">
+								<div>
+									<h2>Nombre</h2>
+									<input class="input-campo_texto" type="text" name="user">
+								</div>
+								<div>
+									<h2>Apellido</h2>
+									<input class="input-campo_texto" type="text" name="user">
+								</div>
+								<div>
+									<h2>Tipo de documento</h2>
+									<select name="tipos_documentos"  class="input-campo_texto">
+									<option value="1">Cédula</option> 
+									<option value="2">Documento de identidad</option> 
+									<option value="3">Pasaporte</option>
+									<option value="4">NIT</option> 
+									</select>
+								</div>
+								<div>
+									<h2>Contraseña</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Número de documento</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Fecha de nacimiento</h2>
+									<input class="input-campo_texto" type="date" name="">
+								</div>
+								<div>
+									<h2>Dirección</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Celular</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Correo</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
 							</div>
-							<div>
-								<h2>Apellido</h2>
-								<input class="input-campo_texto" type="text" name="user">
-							</div>
-							<div>
-								<h2>Tipo de documento</h2>
-								<select name="tipos_documentos"  class="input-campo_texto">
-								   <option value="1">Cédula</option> 
-								   <option value="2">Documento de identidad</option> 
-								   <option value="3">Pasaporte</option>
-								   <option value="4">NIT</option> 
-								</select>
-							</div>
-							<div>
-								<h2>Contraseña</h2>
+						<div class="agregar-examenes">
+							<h1 class="titulo-examenes">Agregar exámenes</h1>
+							<div class="nombre-examen">
+								<h2>Nombre del examen</h2>
 								<input class="input-campo_texto" type="text" name="">
 							</div>
-							<div>
-								<h2>Número de documento</h2>
-								<input class="input-campo_texto" type="text" name="">
+							<div class="custom-input-file">
+								<h2>Cargar examen</h2>
+								<button type="file">CARGAR EXAMEN</button>
 							</div>
-							<div>
-								<h2>Fecha de nacimiento</h2>
+							<div class="custom-input-file">
+								<h2>Cargar lectura</h2>
+								<button type="file">CARGAR LECTURA</button>
+							</div>
+							<div class="fecha-toma-examen">
+								<h2>Fecha toma del examen</h2>
 								<input class="input-campo_texto" type="date" name="">
 							</div>
-							<div>
-								<h2>Dirección</h2>
-								<input class="input-campo_texto" type="text" name="">
-							</div>
-							<div>
-								<h2>Celular</h2>
-								<input class="input-campo_texto" type="text" name="">
-							</div>
-							<div>
-								<h2>Correo</h2>
-								<input class="input-campo_texto" type="text" name="">
-							</div>
+							<a href="" class="add-examen-button">Agregar otro examen</a>
 						</div>
-					<div class="agregar-examenes">
-						<h1 class="titulo-examenes">Agregar exámenes</h1>
-						<div class="nombre-examen">
-							<h2>Nombre del examen</h2>
-							<input class="input-campo_texto" type="text" name="">
+						<div class="add-paciente-button">
+							<button class="boton-sumit" type="submit" name="password">AGREGAR PACIENTE</button>
 						</div>
-						<div class="custom-input-file">
-							<h2>Cargar examen</h2>
-  							<button type="file">CARGAR EXAMEN</button>
-						</div>
-						<div class="custom-input-file">
-							<h2>Cargar lectura</h2>
-  							<button type="file">CARGAR LECTURA</button>
-						</div>
-						<div class="fecha-toma-examen">
-							<h2>Fecha toma del examen</h2>
-							<input class="input-campo_texto" type="date" name="">
-						</div>
-						<a href="" class="add-examen-button">Agregar otro examen</a>
 					</div>
-					<div class="add-paciente-button">
-						<button class="boton-sumit" type="text" name="password">AGREGAR PACIENTE</button>
-					</div>
-				</div>
-			</section>
+				</section>
+			</form>
 			
 		</section>
 		

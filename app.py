@@ -10,10 +10,8 @@ from config import config
 from models import db
 from models import Usuario
 
-from flask_wtf import CsrfProtect
-
 def create_app(enviroment):
-    app = Flask(__name__,static_folder='static')
+    app = Flask(__name__, static_folder='static')
     app.config.from_object(enviroment)
     app.secret_key = 'esto-es-una-clave-muy-secreta!!'
 
@@ -26,14 +24,32 @@ def create_app(enviroment):
 app = create_app(config['development'])
 api = Api(app)
 
-# params sent by post for new user
+# parametros enviados por formularios en post 
 parser_usuario = reqparse.RequestParser()
+
+# del logeo
 parser_usuario.add_argument('user', location='form', type=str)
 parser_usuario.add_argument('password', location='form', type=str)
+
+# de nuevo usuario
 parser_usuario.add_argument('id', location='form', type=str)
+parser_usuario.add_argument('tipoDocumento', location='form', type=str)
 parser_usuario.add_argument('cedula', location='form', type=str)
 parser_usuario.add_argument('nombre', location='form', type=str)
 parser_usuario.add_argument('apellido', location='form', type=str)
+parser_usuario.add_argument('fechaNacimiento', location='form', type=str)
+parser_usuario.add_argument('direccion', location='form', type=str)
+parser_usuario.add_argument('telefono', location='form', type=str)
+parser_usuario.add_argument('email1', location='form', type=str)
+parser_usuario.add_argument('email2', location='form', type=str)
+parser_usuario.add_argument('rol', location='form', type=str)
+parser_usuario.add_argument('examen', location='form', type=str)
+parser_usuario.add_argument('fechaExamen', location='form', type=str)
+parser_usuario.add_argument('lectura', location='form', type=str)
+parser_usuario.add_argument('fechaCreacionUsuario', location='form', type=str)
+
+
+# Templates
 
 # Templates
 @app.route('/')
@@ -97,7 +113,7 @@ def vistapaciente():
 def updatemedico():
     return render_template('admineditarmedico.html',title='Editar Medico')
 
-@app.route('/logout'):
+@app.route('/logout')
 def logout():
     if 'cedula' in session:
      session.pop('cedula')
@@ -149,8 +165,12 @@ class NewUsuario(Resource):
     def post(self):
         args = parser_usuario.parse_args()
         usuario = Usuario(
-            id=args['id'], cedula=args['cedula'], password=args['password'],
-            nombre=args['nombre'], apellido=args['apellido'])
+            id=args['id'], tipoDocument=args['tipoDocumento'], cedula=args['cedula'], 
+            password=args['password'], nombre=args['nombre'], apellido=args['apellido'],
+            fechaNacimiento=args['fechaNacimiento'], direccion=args['direccion'], 
+            telefono=args['telefono'], email1=args['email1'], email2=args['email2'], 
+            rol=args['rol'], examen=args['examen'], fechaExamen=args['fechaexamen'],
+            lectura=args['lectura'])
         db.session.add(usuario)
         db.session.commit()
         usuarios_json = usuario.to_json()
