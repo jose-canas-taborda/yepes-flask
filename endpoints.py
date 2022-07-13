@@ -60,17 +60,19 @@ class NewUsuario(Resource):
     def post(self):
         args = parser_usuario.parse_args()
         usuario = Usuario(
-            id=args['id'], tipoDocument=args['tipoDocumento'], cedula=args['cedula'], 
+            id=args['id'], tipoDocumento=args['tipoDocumento'], cedula=args['cedula'], 
             password=args['password'], nombre=args['nombre'], apellido=args['apellido'],
             fechaNacimiento=args['fechaNacimiento'], direccion=args['direccion'], 
             telefono=args['telefono'], email1=args['email1'], email2=args['email2'], 
-            rol=args['rol'], examen=args['examen'], fechaExamen=args['fechaexamen'],
+            rol=args['rol'], examen=args['examen'], fechaExamen=args['fechaExamen'],
             lectura=args['lectura'])
         db.session.add(usuario)
         db.session.commit()
-        usuarios_json = usuario.to_json()
-        response = {'usuarios_info': usuarios_json}, 201
-        return response
+        # despues de guardar los datos redirecciona al panel para ver los usuarios creados
+        return redirect("/admin")
+        #usuarios_json = usuario.to_json()
+        #response = {'usuarios_info': usuarios_json}, 201
+        #return response
 
 class DeleteUsuario(Resource):
     def post(self):
@@ -97,6 +99,3 @@ class UpdateUsuario(Resource):
             usuarios_json = usuario.to_json()
             response = {'usuario_info': usuarios_json}, 201
         return response
-
-
-

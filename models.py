@@ -15,12 +15,12 @@ class Usuario(db.Model):
     direccion = db.Column(db.String(20), nullable=False)
     telefono = db.Column(db.Integer(), nullable=False, unique=True)
     email1 = db.Column(db.String(20), nullable=False, unique=True)
-    email2 = db.Column(db.String(20), nullable=False)
-    rol = db.Column(db.String(20), nullable=False)
-    examen = db.Column(db.String(20), nullable=False)
-    fechaExamen = db.Column(db.DateTime(), nullable=False)
-    lectura = db.Column(db.String(20), nullable=False)
-    fechaCreacionUsuario = db.Column(db.DateTime(), nullable=False, default=db.func.current_timestamp())
+    email2 = db.Column(db.String(20), nullable=True)
+    rol = db.Column(db.String(20), nullable=True)
+    examen = db.Column(db.String(20), nullable=True)
+    fechaExamen = db.Column(db.DateTime(), nullable=True)
+    lectura = db.Column(db.String(20), nullable=True)
+    fechaCreacionUsuario = db.Column(db.DateTime(), nullable=True, default=db.func.current_timestamp())
 
     def to_json(self):
         return {
@@ -29,12 +29,12 @@ class Usuario(db.Model):
             'cedula': self.cedula,
             'nombre': self.nombre,
             'apellido': self.apellido,
-            'fecha Nacimiento': self.fechaNacimiento,
+            #'fecha Nacimiento': self.fechaNacimiento,
             'direccion': self.direccion,
             'telefono': self.telefono,
             'correo1': self.email1,
             'correo2': self.email2,
-            'creado': self.fechaCreacionUsuario,
+            #'creado': self.fechaCreacionUsuario,
             'examen': self.examen,
             'lectura': self.lectura,
 

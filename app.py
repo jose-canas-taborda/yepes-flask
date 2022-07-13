@@ -100,5 +100,12 @@ def valida_session():
         #if 'usuario' not in session or 'password' not in session:
         #    return redirect("/login-error")
 
+api.add_resource(Autenticacion, '/autenticacion')
+api.add_resource(Usuarios, '/usuarios/')
+api.add_resource(GetUsuario, '/usuarios/get/<string:usuario_id>')
+api.add_resource(NewUsuario, '/usuarios/new')
+api.add_resource(DeleteUsuario, '/usuarios/delete')
+api.add_resource(UpdateUsuario, '/usuarios/update')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
