@@ -44,49 +44,50 @@
 					<div class="grid-form">
 							<div class="form-campos-datos-personales">
 								<div>
-									<h2>Nombre / Razón social</h2>
-									<input class="input-campo_texto" type="text" name="user">
+									<h2>Nombre</h2>
+									<input class="input-campo_texto" type="text" name="nombre" required>
 								</div>
 								<div>
 									<h2>Apellido</h2>
-									<input class="input-campo_texto" type="text" name="user">
+									<input class="input-campo_texto" type="text" name="apellido" required>
 								</div>
 								<div>
 									<h2>Tipo de documento</h2>
-									<select name="tipos_documentos"  class="input-campo_texto">
+									<select name="tipoDocumento"  class="input-campo_texto" required>
 									<option value="1">Cédula</option> 
-									<option value="2">Documento de identidad</option> 
-									<option value="3">Pasaporte</option>
-									<option value="4">NIT</option> 
+									<option value="2">Pasaporte</option>
+									<option value="3">NIT</option> 
 									</select>
 								</div>
 								<div>
 									<h2>Contraseña</h2>
-									<input class="input-campo_texto" type="text" name="">
+									<input class="input-campo_texto" type="password" name="password" minlength="8" required>
 								</div>
 								<div>
 									<h2>Número de documento</h2>
-									<input class="input-campo_texto" type="text" name="">
+									<input class="input-campo_texto" type="number" name="cedula" required>
 								</div>
 								<div>
 									<h2>Fecha de nacimiento</h2>
-									<input class="input-campo_texto" type="date" name="">
+									<input class="input-campo_texto" type="date" name="fechaNacimiento">
 								</div>
 								<div>
-									<h2>Dirección consultorio</h2>
-									<input class="input-campo_texto" type="text" name="">
+									<h2>Dirección</h2>
+									<input class="input-campo_texto" type="text" name="direccion">
 								</div>
 								<div>
 									<h2>Celular</h2>
-									<input class="input-campo_texto" type="text" name="">
+									<input class="input-campo_texto" type="number" name="telefono" minlength="7" maxlength="10" required>
 								</div>
 								<div>
 									<h2>Correo</h2>
-									<input class="input-campo_texto" type="text" name="">
+									<input class="input-campo_texto" type="email" name="correo1" required>
 								</div>
 								<div>
 									<h2>Correo 2</h2>
-									<input class="input-campo_texto" type="text" name="">
+									<input class="input-campo_texto" type="email" name="correo2">
+									<input type="hidden datetime" name="fechaCreacionUsuario">
+
 								</div>
 							</div>
 					</div>

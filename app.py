@@ -28,13 +28,12 @@ api = Api(app)
 parser_usuario = reqparse.RequestParser()
 
 # del logeo
-parser_usuario.add_argument('user', location='form', type=str)
+parser_usuario.add_argument('cedula', location='form', type=str)
 parser_usuario.add_argument('password', location='form', type=str)
 
 # de nuevo usuario
 parser_usuario.add_argument('id', location='form', type=str)
 parser_usuario.add_argument('tipoDocumento', location='form', type=str)
-parser_usuario.add_argument('cedula', location='form', type=str)
 parser_usuario.add_argument('nombre', location='form', type=str)
 parser_usuario.add_argument('apellido', location='form', type=str)
 parser_usuario.add_argument('fechaNacimiento', location='form', type=str)
@@ -170,7 +169,7 @@ class NewUsuario(Resource):
             fechaNacimiento=args['fechaNacimiento'], direccion=args['direccion'], 
             telefono=args['telefono'], email1=args['email1'], email2=args['email2'], 
             rol=args['rol'], examen=args['examen'], fechaExamen=args['fechaexamen'],
-            lectura=args['lectura'])
+            lectura=args['lectura'], fechaCreacionUsuario=args['fechaCreacionUsuario'])
         db.session.add(usuario)
         db.session.commit()
         usuarios_json = usuario.to_json()
