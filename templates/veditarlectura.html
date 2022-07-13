@@ -14,7 +14,7 @@
 	<header>
 			<div class="nav-principal">
 				<div class="nav-principal_contenedor">
-					<a href="#">Cerrar sesión</a>
+					<a href="/logout">Cerrar sesión</a>
 				</div>
 			</div>
 			<div class="nav-banner">
@@ -23,9 +23,9 @@
 						<img src="static/images/logo-SD.png" alt="Logo">
 					<div class="regresar-button">
 						<div class="agregar-button">
-						<a href="vadmlector.html"><i class="icono-agregar fas fa-arrow-left"></i></a>
+						<a href="/medico-lector"><i class="icono-agregar fas fa-arrow-left"></i></a>
 						</div>
-						<a href="vadmlector.html"><p class="regresar">Regresar</p></a>
+						<a href="/medico-lector"><p class="regresar">Regresar</p></a>
 					</div>
 					</div>
 					
@@ -42,6 +42,7 @@
 		</header>
 
 		<main class="main-contenedor-examenes-lecturas">
+		<form action="usuarios/new" method="post">
 			<section class="grid-contenedor-lecturas"> 
 
 
@@ -164,7 +165,7 @@
 						</div>
 					</div>
 					<div class="add-paciente-button add-btn-lectura">
-						<button class="boton-sumit" type="text" name="password">ACTUALIZAR LECTURA</button>
+						<button class="boton-sumit" type="submit">ACTUALIZAR LECTURA</button>
 					</div>
 					<div class="buscador-alert">
 						<div>
@@ -177,7 +178,7 @@
 
 		
 			</section>
-			
+		</form>
 
 		</main>
 

@@ -14,7 +14,7 @@
 	<header>
 		<div class="nav-principal">
 			<div class="nav-principal_contenedor">
-				<a href="#">Cerrar sesión</a>
+				<a href="/logout">Cerrar sesión</a>
 			</div>
 		</div>
 		<div class="nav-banner">
@@ -23,17 +23,17 @@
 					<img src="static/images/logo-SD.png" alt="Logo">
 				<div class="regresar-button">
 					<div class="agregar-button">
-					<a href="vadministrador.html"><i class="icono-agregar fas fa-arrow-left"></i></a>
+					<a href="/admin"><i class="icono-agregar fas fa-arrow-left"></i></a>
 					</div>
-					<a href="vadministrador.html"><p class="regresar">Regresar</p></a>
+					<a href="/admin"><p class="regresar">Regresar</p></a>
 				</div>
 				</div>
 				
 				<div class="nav-titulos">
 					<h1>Editando Remisor</h1>
 					<div class="info-usuario">
-						<p class="nombre-usuario">{{ nombre }}</p>
-						<p class="doumento-usuario">{{ cedula }}</p>
+						<p class="nombre-usuario">{{ nombre }}NOmbre Del Usuario</p>
+						<p class="doumento-usuario">{{ cedula }}Documento Usuario</p>
 					</div>
 				</div>
 				</div>	
@@ -124,7 +124,7 @@
 					<input class="input-campo_texto" type="text" name="">
 				</div>
 				<div class="position-addbutton add-paciente-button">
-					<button class="boton-sumit" type="text" name="password">AGREGAR PACIENTE</button>
+					<button class="boton-sumit" type="submit">AGREGAR PACIENTE</button>
 				</div>
 				<div class="position-addbutton-alerta buscador-alert">
 					<div>
@@ -157,7 +157,7 @@
 				<div class="lista-remisores-titulo-seleccion">
 					<div>FECHA CREACIÓN DEL PACIENTE</div>
 					<div>DOCUMENTO</div>
-					<div>NOMBRES Y APELLIDOS DEL REMISOR</div>
+					<div>NOMBRES Y APELLIDOS</div>
 					<div>-</div>
 				</div>
 				{% for datos in datos %}

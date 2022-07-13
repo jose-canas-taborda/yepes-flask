@@ -14,7 +14,7 @@
 	<header>
 		<div class="nav-principal">
 			<div class="nav-principal_contenedor">
-				<a href="#">Cerrar sesión</a>
+				<a href="/logout">Cerrar sesión</a>
 			</div>
 		</div>
 		<div class="nav-banner">
@@ -23,9 +23,9 @@
 					<img src="static/images/logo-SD.png" alt="Logo">
 				<div class="regresar-button">
 					<div class="agregar-button">
-					<a href="vadministrador.html"><i class="icono-agregar fas fa-arrow-left"></i></a>
+					<a href="/admin"><i class="icono-agregar fas fa-arrow-left"></i></a>
 					</div>
-					<a href="vadministrador.html"><p class="regresar">Regresar</p></a>
+					<a href="/admin"><p class="regresar">Regresar</p></a>
 				</div>
 				</div>
 				
@@ -86,7 +86,8 @@
 								<div>
 									<h2>Correo 2</h2>
 									<input class="input-campo_texto" type="email" name="correo2">
-									<input type="hidden datetime" name="fechaCreacionUsuario">
+									<input type="hidden" name="fechaCreacionUsuario">
+									<input type="hidden" name="rol" value="medico">
 
 								</div>
 							</div>

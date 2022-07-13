@@ -12,7 +12,8 @@ from endpoints import *
 def create_app(enviroment):
     app = Flask(__name__, static_folder='static')
     app.config.from_object(enviroment)
-    app.secret_key = 'esto-es-una-clave-muy-secreta!!'
+    app.secret_key = 'Er3z1ns0p0rt4b3!'
+    app.config['UPLOAD_FOLDER'] = "static/uploads/"
 
     with app.app_context():
         db.init_app(app)
@@ -26,18 +27,32 @@ api = Api(app)
 # Templates
 @app.route('/')
 def index():
-    return render_template('index.html', title='Index')
+    return render_template('login.html', title='Ingrese sus Datos')
 
-@app.route('/login')
+'''@app.route('/login')
 def login():
-    return render_template('login.html', title='Login')
+    return render_template('login.html', title='Login')'''
+
+@app.route('/login', methods=["POST"])
+def login():
+    if request.method == "POST":
+        cedula = request.form['cedula']
+        rol = request.form['rol']
+        session['user'] = cedula
+        session['rol'] = rol
+        return redirect(url_for('admin'))
+    else:
+        return "No tiene Permiso, favor verificar datos"
 
 @app.route('/admin')
 def admin():
-    usuarios = Usuario.query.all()
-    usuarios_json = [usuario.to_json() for usuario in usuarios]
-    print(usuarios_json)
-    return render_template('panel-control.html', title='Admin', datos=usuarios_json)
+    if 'user' in session and session['rol'] == "admin":
+        usuarios = Usuario.query.all()
+        usuarios_json = [usuario.to_json() for usuario in usuarios]
+        print(usuarios_json)
+        return render_template('panel-control.html', title='Admin', datos=usuarios_json)
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/login-error')
 def loginError():
@@ -49,47 +64,71 @@ def loginError():
 
 @app.route('/nuevo-usuario')
 def nuevoUsuario():
-    #if session['role'] == 'admin':
-        #pass #return render_template('nuevo-usuario.html', title='Nuevo usuario')
-    return render_template('adminaddpaciente.html', title='Nuevo usuario')
+    if 'user' in session and session['rol'] == "admin":
+        return render_template('adminaddpaciente.html', title='Nuevo usuario')
+    else:
+        return "No tiene Permisos para acceder aquí"
+
 
 @app.route('/agregar-medico')
 def addmedico():
-    return render_template('adminaddmedico.html', title='Nuevo Remisor')
+    if 'user' in session and session['rol'] == "admin":
+        return render_template('adminaddmedico.html', title='Nuevo Remisor')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/agregar-paciente')
 def addpaciente():
-    return render_template('adminaddpaciente.html', title='Nuevo Paciente')
+    if 'user' in session and session['rol'] == "admin":
+        return render_template('adminaddpaciente.html', title='Nuevo Paciente')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/editar-paciente')
 def editpaciente():
-    return render_template('admineditarpaciente.html', title='Editar Paciente')
-
+    if 'user' in session and session['rol'] == "admin":
+        return render_template('admineditarpaciente.html', title='Editar Paciente')
+    else:
+        return "No tiene Permisos para acceder aquí"
 @app.route('/medico-lector')
 def vistalector():
-    return render_template('vadmlector.html', title='Agregar Lecturas y Exámenes')
+    if 'user' in session and session['rol'] == "admin" or "lector":
+        return render_template('vadmlector.html', title='Agregar Lecturas y Exámenes')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/editar-lectura')
 def editarlectura():
-    return render_template('veditarlectura.html', title='Editar Lecturas y Exámenes')
+    if 'user' in session and session['rol'] == "admin" or "lector":
+        return render_template('veditarlectura.html', title='Editar Lecturas y Exámenes')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/medico')
 def vistamedico():
-    return render_template('vmedico.html', title='Panel del Médico')
+    if 'user' in session and session['rol'] == "admin" or "medico":
+        return render_template('vmedico.html', title='Panel del Médico')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/paciente')
 def vistapaciente():
-    return render_template('vpaciente.html', title='Panel del Paciente')
+    if 'user' in session and session['rol'] == "admin" or "paciente":
+        return render_template('vpaciente.html', title='Panel del Paciente')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
-@app.route('/editar-medico/<int:id>')
+@app.route('/editar-medico')
 def updatemedico():
-    return render_template('admineditarmedico.html',title='Editar Medico')
+    if 'user' in session and session['rol'] == "admin":
+        return render_template('admineditarmedico.html',title='Editar Medico')
+    else:
+        return "No tiene Permisos para acceder aquí"
 
 @app.route('/logout')
 def logout():
-    if 'cedula' in session:
-     session.pop('cedula')
-    return redirect(url_for('login'))
+    session.clear()
+    return redirect(url_for('index'))
 
 #@app.before_request
 def valida_session():

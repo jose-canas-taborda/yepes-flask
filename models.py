@@ -8,7 +8,7 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tipoDocumento = db.Column(db.String(20), nullable=False)
     cedula = db.Column(db.String(10), nullable=False, unique=True) 
-    password = db.Column(db.String(10), nullable=False) 
+    password = db.Column(db.String(102), nullable=False) 
     nombre = db.Column(db.String(20), nullable=False) 
     apellido = db.Column(db.String(20), nullable=False)
     fechaNacimiento = db.Column(db.DateTime(), nullable=False)

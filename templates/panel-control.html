@@ -14,7 +14,7 @@
 	<header>
 		<div class="nav-principal">
 			<div class="nav-principal_contenedor">
-				<a href="#">Cerrar sesión</a>
+				<a href="#/logout">Cerrar sesión</a>
 			</div>
 		</div>
 		<div class="nav-banner">
@@ -34,13 +34,13 @@
 			<div class="editar-content">
 				<h1>Pacientes</h1>
 				<div class="agregar-button">
-					<a href="agregar-paciente"><i class="icono-agregar fas fa-plus"></i></a>
+					<a href="/agregar-paciente"><i class="icono-agregar fas fa-plus"></i></a>
 				</div>
 				<div class="eliminar-button">
-					<a href="#"><i class="icono-agregar fas fa-trash-alt"></i></a>
+					<a href="/usuarios/delete"><i class="icono-agregar fas fa-trash-alt"></i></a>
 				</div>
 				<div class="editar-button">
-					<a href="admineditarpaciente.html"><i class="icono-agregar fas fa-pencil-alt"></i></a>
+					<a href="/editar-paciente"><i class="icono-agregar fas fa-pencil-alt"></i></a>
 				</div>
 			</div>
 			<div class="buscador">
@@ -62,12 +62,12 @@
 					<input type="checkbox" class="input-checkbox" name="">
 					<div>FECHA CREACIÓN PACIENTE</div>
 					<div>DOCUMENTO</div>
-					<div>NOMBRES Y APELLIDOS DEL PACIENTE</div>
+					<div>NOMBRES Y APELLIDOS</div>
 				</div>
 				{% for dato in datos %}
 				<div class="lista-pacientes-contenido-seleccion">
 					<input type="checkbox" class="input-checkbox" name="">
-					<div>{{dato['creado']}}</div>
+					<div>{{dato['fechaCreacionUsuario']}}</div>
 					<div>{{dato['cedula']}}</div>
 					<div>{{dato['nombre']}} {{dato['apellido']}}</div>
 				</div>
@@ -83,13 +83,13 @@
 			<div class="editar-content">
 				<h1>Remisores</h1>
 				<div class="agregar-button">
-					<a href="adminaddmedico.html"><i class="icono-agregar fas fa-plus"></i></a>
+					<a href="/agregar-medico"><i class="icono-agregar fas fa-plus"></i></a>
 				</div>
 				<div class="eliminar-button">
-					<a href="#"><i class="icono-agregar fas fa-trash-alt"></i></a>
+					<a href="/usuarios/delete"><i class="icono-agregar fas fa-trash-alt"></i></a>
 				</div>
 				<div class="editar-button">
-					<a href="admineditarmedico.html"><i class="icono-agregar fas fa-pencil-alt"></i></a>
+					<a href="/editar-medico"><i class="icono-agregar fas fa-pencil-alt"></i></a>
 				</div>
 			</div>
 			<div class="buscador">
@@ -108,9 +108,24 @@
 
 			<div class="lista-pacientes-busqueda-seleccion">
 
-				<div class="main-paginacion-examenes">
-					Paginacion
-				</div>
+				<div class="lista-pacientes-busqueda-seleccion">
+					<div class="lista-pacientes-titulo-seleccion">
+						<input type="checkbox" class="input-checkbox" name="">
+						<div>FECHA CREACIÓN REMISOR</div>
+						<div>DOCUMENTO</div>
+						<div>NOMBRES Y APELLIDOS</div>
+					</div>
+					{% for dato in datos %}
+					<div class="lista-pacientes-contenido-seleccion">
+						<input type="checkbox" class="input-checkbox" name="">
+						<div>{{dato['fechaCreacionUsuario']}}</div>
+						<div>{{dato['cedula']}}</div>
+						<div>{{dato['nombre']}} {{dato['apellido']}}</div>
+					</div>
+					{% endfor %}
+					<div class="main-paginacion-examenes">
+						Paginacion
+					</div>
 			</div>
 		</section>
 	</main>
