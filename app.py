@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, url_for
 from flask_restful import Resource, Api, reqparse
 from flask import render_template
 
@@ -10,10 +10,12 @@ from config import config
 from models import db
 from models import Usuario
 
+from flask_wtf import CsrfProtect
+
 def create_app(enviroment):
-    app = Flask(__name__)
+    app = Flask(__name__,static_folder='static')
     app.config.from_object(enviroment)
-    app.secret_key = 'esto-es-una-clave-muy-secreta'
+    app.secret_key = 'esto-es-una-clave-muy-secreta!!'
 
     with app.app_context():
         db.init_app(app)
@@ -47,7 +49,7 @@ def admin():
     usuarios = Usuario.query.all()
     usuarios_json = [usuario.to_json() for usuario in usuarios]
     print(usuarios_json)
-    return render_template('admin-index.html', title='Admin', datos=usuarios_json)
+    return render_template('panel-control.html', title='Admin', datos=usuarios_json)
 
 @app.route('/login-error')
 def loginError():
@@ -59,9 +61,49 @@ def loginError():
 
 @app.route('/nuevo-usuario')
 def nuevoUsuario():
-    if session['role'] == 'admin':
-        pass #return render_template('nuevo-usuario.html', title='Nuevo usuario')
-    return render_template('nuevo-usuario.html', title='Nuevo usuario')
+    #if session['role'] == 'admin':
+        #pass #return render_template('nuevo-usuario.html', title='Nuevo usuario')
+    return render_template('adminaddpaciente.html', title='Nuevo usuario')
+
+@app.route('/agregar-medico')
+def addmedico():
+    return render_template('adminaddmedico.html', title='Nuevo Remisor')
+
+@app.route('/agregar-paciente')
+def addpaciente():
+    return render_template('adminaddpaciente.html', title='Nuevo Paciente')
+
+@app.route('/editar-paciente')
+def editpaciente():
+    return render_template('admineditarpaciente.html', title='Editar Paciente')
+
+@app.route('/medico-lector')
+def vistalector():
+    return render_template('vadmlector.html', title='Agregar Lecturas y Exámenes')
+
+@app.route('/editar-lectura')
+def editarlectura():
+    return render_template('veditarlectura.html', title='Editar Lecturas y Exámenes')
+
+@app.route('/medico')
+def vistamedico():
+    return render_template('vmedico.html', title='Panel del Médico')
+
+@app.route('/paciente')
+def vistapaciente():
+    return render_template('vpaciente.html', title='Panel del Paciente')
+
+@app.route('/editar-medico/<int:id>')
+def updatemedico():
+    return render_template('admineditarmedico.html',title='Editar Medico')
+
+@app.route('/logout'):
+def logout():
+    if 'cedula' in session:
+     session.pop('cedula')
+    return redirect(url_for('login'))
+
+
 
 #@app.before_request
 def valida_session():
@@ -71,6 +113,8 @@ def valida_session():
         print('valida session')
         #if 'usuario' not in session or 'password' not in session:
         #    return redirect("/login-error")
+
+
 
 # API Resources
 class Autenticacion(Resource):
@@ -145,6 +189,7 @@ api.add_resource(GetUsuario, '/usuarios/get/<string:usuario_id>')
 api.add_resource(NewUsuario, '/usuarios/new')
 api.add_resource(DeleteUsuario, '/usuarios/delete')
 api.add_resource(UpdateUsuario, '/usuarios/update')
+
 
 
 if __name__ == '__main__':

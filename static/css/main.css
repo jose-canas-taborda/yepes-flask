@@ -1,0 +1,1206 @@
+:root{
+	--main-color-grisclaro: #6D6D6D;
+	--main-color-gristexto: #9FA2B4;
+	--main-color-gristextooscuro: #6C6C6C;
+	--main-color-campos-formulario: #F7F8FC;
+	--main-color-rojooscuro: #7E0000;
+	--main-cpñpr-rojo: #BA0000;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700;900&display=swap');
+
+/*font-family: 'Roboto', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Roboto Slab', serif;*/
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+
+body{
+	font-size: 14px;
+	font-family:  'Roboto', sans-serif;
+	font-style: normal;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	color:  #252733;
+	background-color: #F7F8FC;
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-family:'Mulish', sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 30px;
+	color: var(--main-color-grisclaro);
+	margin-bottom: 0;
+	letter-spacing: 0.3px;
+}
+
+h2{
+	font-family:'Mulish', sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 15px;
+	color: var(--main-color-gristexto);
+	margin-bottom: 0;
+	letter-spacing: 0.3px;
+}
+
+
+p {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	color: var(--main-color-gristexto);
+}
+
+/*loguin----------------------------------------------------------*/
+
+.main-contenedor_loguin {
+	position: absolute;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-content: center;
+	width: 100%;
+	height: 100%;
+	
+}
+.contenedor-loguin {
+	width: 380px;
+	padding: 0px 32px 53px 32px;
+	background-color: #fff;
+	border-radius: 8px;
+	border: 1px solid #DFE0EB;
+	box-sizing: border-box;
+	margin: auto;
+	text-align: center;
+}
+
+.contenedor-logo img{
+	width: 200px;
+	height: auto;
+	margin-top: 47px;
+}
+
+.grid-contenedor_loguin p{
+	margin-top: 5px;
+	margin-bottom: 32px;
+}
+
+.grid-contenedor_loguin h2{
+	text-align: left;
+	text-transform: uppercase;
+	margin-bottom: 6px;
+}
+
+.grid-contenedor_loguin .input-campo_texto{
+	width: 100%;
+	height: 42px;
+	background-color:var(--main-color-campos-formulario);
+	border-radius: 8px;
+	border: 1px solid #e0e0e4;
+	box-sizing: border-box;
+	box-shadow: 0px 3px 2px #cdced1;
+	margin-bottom: 15px;
+	outline: none;
+	padding: 5px 10px;
+	color: var(--main-color-gristextooscuro);
+}
+
+.grid-contenedor_loguin a{
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 24px;
+	letter-spacing: 0.3px;
+	color: var(--main-color-grisclaro);
+	text-decoration: none;
+}
+
+.boton-sumit{
+	background-color: var(--main-color-rojooscuro);
+	margin-top: 26px;
+	color: #fff;
+	border-radius: 8px;
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	width: 100%;
+	height: 48px;
+	border: none;
+}
+
+.boton-sumit:hover {
+	background-color: var(--main-cpñpr-rojo);
+	border: 1px solid #c6c6c6;
+	cursor: pointer;
+}
+
+.alert-log{
+	display: flex;
+	align-items: center;
+	background-color: #FFF1F0;
+	border: 0.5px solid #FFA39E;
+	border-radius: 8px;
+	padding-left: 15px;
+	color: var(--main-color-grisclaro);
+	width: 94%;
+    height: 40px;
+    padding-bottom: 0px;
+    margin-top: 20px;
+    padding-right: 8px;
+    padding-top: 12px;
+}
+
+.iconoAlerta{
+	color: #F5222D;
+	font-size: 20px;
+}
+
+.alert-log p{
+	margin-left: 10px;
+	font-size: 13px;
+	margin-top: 22px;
+}
+
+/*Paciente------------------------------------------------------------*/
+
+/*header--------------------*/
+
+
+header {
+	width: 100%;
+	height: auto;
+
+}
+
+header .nav-principal{
+	width: 100%;
+	height: 45px;
+	background-color: var(--main-color-rojooscuro);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+
+}
+
+.nav-principal_contenedor{
+	width: 1440px;
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 42px ;
+}
+
+header .nav-principal a{
+	color: #fff;
+	text-transform: uppercase;
+	font-family:'Mulish', sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 15px;
+	letter-spacing: 0.3px;
+
+}
+
+header .nav-banner{
+	width: 1440px;
+	margin: auto;
+}
+
+header .nav-grid-banner_logo{
+	background-image: url("../images/fondo-gris.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 130px 60px  ;
+	
+
+}
+.nav-grid-banner_logo img{
+	padding: 20px 45px 20px 45px;
+	width: 179px;
+	height: auto;
+	margin-top: auto;
+}
+
+.nav-titulos{
+	padding: 0 45px 0 45px;
+	background-color: blue;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #F7F8FC;
+	border-radius: 8px;
+	box-sizing: border-box;
+	border: 1px solid #eae9e9;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) ;
+
+}
+
+.nav-titulos h1{
+	color: var(--main-color-rojooscuro);
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.nav-titulos .info-usuario .nombre-usuario{
+	font-size: 18px;
+	margin-left: 42px;
+}
+
+.nav-titulos .info-usuario .doumento-usuario{
+	margin-top: -10px;
+	margin-left: 42px;
+}
+
+/*main-paciente--------------------*/
+
+.main-contenedor-examenes{
+	width: 1440px;
+	height: auto;
+	margin: 25px auto 42px auto;
+}
+
+main .grid-main-contenendor-examenes{
+	display: grid;
+	grid-template-columns: 1f;
+	grid-template-rows: repeat(auto-fill, 50px);
+	border-radius: 8px;
+}
+
+.grid-main-contenendor-examenes .contenedor-examenes-titulo{
+	display: grid;
+	grid-template-columns: 26% 50% 12% 12%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: left;
+	z-index: 1;
+}
+
+.grid-main-contenendor-examenes .contenedor-examenes-resultados{
+	display: grid;
+	grid-template-columns: 26% 50% 12% 12%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+
+}
+
+.iconoDescarga{
+	color: var(--main-color-rojooscuro);
+	font-size: 18px;
+}
+
+.iconoDescarga-lectura{
+	color: var(--main-cpñpr-rojo);
+	font-size: 18px;
+}
+
+.main-paginacion-examenes{
+	width: 100%;
+	text-align: right;
+	margin-top: 25px;
+}
+
+
+/*Whatsapp-------------------*/
+
+img.btn-whatsapp {
+	display: block !important;
+	position: fixed;
+	z-index: 9999999;
+	bottom: 20px;
+	right: 20px;
+	cursor: pointer;
+	border-radius:100px !important;
+}
+
+img.btn-whatsapp:hover{
+	border-radius:100px !important;
+	-webkit-box-shadow: 0px 0px 15px 0px rgba(7,94,84,1); 
+	-moz-box-shadow: 0px 0px 15px 0px rgba(7,94,84,1);
+	box-shadow: 0px 0px 15px 0px rgba(7,94,84,1);
+	transition-duration: 1s;
+} 
+
+
+/*Footer----------------------*/
+
+footer {
+	width: 100%;
+	height: 60px;
+	background-color: #DBDBE1;
+	border: 1px solid #DFE0EB;
+	box-sizing: border-box;
+	box-shadow: 0px -4px 4px #C4C4C4;
+
+}
+
+
+.info-contacto{
+	width: 1440px;
+	margin:  auto;
+	display: grid;
+	align-items: center;
+}
+
+footer .info-contacto p{
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: left;
+	color: #000;
+	padding-right: 45px;
+	padding-left: 55px;
+
+}
+
+footer .info-contacto p span{
+	color: var(--main-color-rojooscuro);
+}
+
+/*Vista médico ------------------------------------------------------*/
+
+.main-contenedor-info{
+	width: 1440px;
+	height: auto;
+	margin: 20px auto 20px auto;
+}
+
+.grid-contenedor-info{
+	display: grid;
+	grid-gap: 12px;
+	width: 99%;
+	height: auto;
+	grid-template-columns: 35% 65%;
+	grid-template-rows: 50px auto;
+
+
+}
+
+.buscador{
+	display: flex;
+	justify-items: space-between;
+}
+
+.input-campo_busqueda{
+	width: 90%;
+	height: 42px;
+	background-color:var(--main-color-campos-formulario);
+	border-radius: 8px 0px 0px 8px;
+	border: 1px solid #e0e0e4;
+	box-sizing: border-box;
+	box-shadow: 0px 3px 2px #cdced1;
+	margin-bottom: 15px;
+	outline: none;
+	padding: 5px 10px;
+	color: var(--main-color-gristextooscuro);
+}
+
+.buscador-button{
+	width: 42px;
+	height: 42px;
+	border-radius: 0 8px 8px 0;
+	background-color: var(--main-color-rojooscuro);
+	color: #fff;
+	box-shadow:  0px 3px 2px #cdced1;
+}
+
+.buscador-button:hover{
+	background-color: var(--main-cpñpr-rojo);
+}
+.buscador-button .iconoBuscar{
+	color: #fff;
+	font-size: 18px;
+	margin: 10px;
+}
+
+.buscador-alert{
+	display: flex;
+	align-items: center;
+	background-color: #FFF1F0;
+	border: 0.5px solid #FFA39E;
+	border-radius: 8px;
+	padding-left: 15px;
+	color: var(--main-color-grisclaro);
+	width: 50%;
+	height: 41px;
+}
+
+.iconoAlerta{
+	color: #F5222D;
+	font-size: 20px;
+}
+
+.buscador-alert p{
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+.lista-pacientes-busqueda{
+	width: 100%;
+}
+
+.lista-pacientes-titulo{
+	display: grid;
+	grid-template-columns: 30% 70% ;
+	grid-column-gap: 10px;
+	padding: 15px 45px 15px 45px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: center;
+	z-index: 1;
+	margin-top: 15px;
+}
+
+.lista-pacientes-contenido{
+	display: grid;
+	grid-template-columns: 30% 70% ;
+	grid-column-gap: 10px;
+	padding: 10px 45px 10px 45px;
+	text-align: center;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+}
+
+.contenedor-info-paciente{
+	display: flex;
+	justify-content: space-between;
+	background: #FFFFFF;
+	border: 1px solid #DFE0EB;
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 12px 45px 12px 45px;
+	margin-bottom: 11px;
+	color: var( --main-color-gristextooscuro );
+	margin-top: -5px;
+
+}
+
+.contenedor-info-pacientes-izquierdo{
+	margin-right: 15px;
+}
+
+.contenedor-info-pacientes-izquierdo span{
+	font-weight: bold;
+}
+
+
+/*Vista administrador ------------------------------------------------------*/
+
+.main-contenedor-admin{
+	width: 1440px;
+	height: auto;
+	margin: 20px auto 20px auto;
+	display: grid;
+	grid-template-columns: 49.5% 49.5%;
+	grid-gap: 25px;
+}
+
+.grid-contenedor-admin{
+	display: grid;
+	width: 99%;
+	height: auto;
+	grid-template-columns: 98%;
+	grid-template-rows: repeat(4, auto);
+}
+
+.editar-content{
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+
+
+}
+.editar-content h1{
+	font-family:'Mulish', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 30px;
+	color: var(--main-color-rojooscuro);
+	margin-top: -3px;
+	margin-right: 15px;
+}
+
+.agregar-button, .eliminar-button, .editar-button {
+	width: 42px;
+	height: 42px;
+	border-radius: 8px 8px ;
+	background-color: var(--main-color-rojooscuro);
+	color: #fff;
+	box-shadow:  0px 3px 2px #cdced1;
+	margin: 10px 10px;
+}
+
+.icono-agregar{
+	color: #fff;
+	font-size: 18px;
+	margin: 12px;
+}
+
+.agregar-button:hover{
+	background-color: var(--main-cpñpr-rojo);
+}
+
+.eliminar-button:hover{
+	background-color: var(--main-cpñpr-rojo);
+}
+
+.editar-button:hover{
+	background-color: var(--main-cpñpr-rojo);
+}
+
+.main-contenedor-admin .grid-contenedor-admin .buscador .input-campo_busqueda{
+	width: 70%;
+}
+
+.main-contenedor-admin .grid-contenedor-admin .buscador-alert{
+	width: 70%;
+}
+
+.lista-pacientes-busqueda-seleccion{
+	width: 100%;
+}
+
+.lista-pacientes-titulo-seleccion{
+	display: grid;
+	grid-template-columns: 3% 34% 20% 42%;
+	grid-column-gap: 8px;
+	padding: 15px 25px 15px 10px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: center;
+	z-index: 1;
+	margin-top: 15px;
+}
+
+.lista-pacientes-contenido-seleccion{
+	display: grid;
+	grid-template-columns: 5% 34% 20% 40%  ;
+	grid-column-gap: 10px;
+	padding: 10px 25px 10px 20px;
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+}
+
+
+
+.lista-pacientes-titulo-seleccion input[type=checkbox ] {
+	width: 20px;
+	height: 18px;
+}
+
+
+/*Vista administrador agregar paciente ------------------------------------------------------*/
+
+.grid-logo-boton{
+	display: grid;
+    grid-template-columns: 84% 12%;
+}
+
+.regresar-button{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	justify-items: flex-end;
+    align-items: flex-end;
+
+}
+
+.regresar-button .regresar{
+	font-family:'Mulish', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 15px;
+	text-align: center;
+	letter-spacing: 0.3px;
+	text-decoration-line: underline;
+	text-transform: uppercase;
+	color: var(--main-color-rojooscuro);
+	margin-bottom: 20px;
+
+}
+
+.main-contenedor-add-paciente{
+	width: 1440px;
+	height: auto;
+	margin: 25px auto 42px auto;
+}
+
+.grid-main-contenedor-add-paciente img{
+	width: 350px ;
+}
+.grid-main-contenedor-add-paciente{
+	display: grid;
+	grid-template-columns: 25% 75%;
+}
+
+.form-add-paciente{
+	background-color: #fff;
+	border-top-right-radius: 8px 8px;
+	padding: 42px 60px 42px 60px;
+}
+
+.grid-form{
+	display: grid;
+	grid-template-rows: repeat(3, auto);
+}
+
+.form-campos-datos-personales{
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+.form-campos-datos-personales .input-campo_texto{
+	width: 350px;
+	height: 42px;
+	background-color:var(--main-color-campos-formulario);
+	border-radius: 8px;
+	border: 1px solid #e0e0e4;
+	box-sizing: border-box;
+	box-shadow: 0px 3px 2px #cdced1;
+	margin-bottom: 15px;
+	outline: none;
+	padding: 5px 10px;
+	color: var(--main-color-gristextooscuro);
+}
+
+.form-campos-datos-personales h2{
+	text-align: left;
+	text-transform: uppercase;
+	margin-bottom: 6px;
+}
+
+.agregar-examenes .input-campo_texto{
+	width: 350px;
+	height: 42px;
+	background-color:var(--main-color-campos-formulario);
+	border-radius: 8px;
+	border: 1px solid #e0e0e4;
+	box-sizing: border-box;
+	box-shadow: 0px 3px 2px #cdced1;
+	margin-bottom: 15px;
+	outline: none;
+	padding: 5px 10px;
+	color: var(--main-color-gristextooscuro);
+}
+
+.agregar-examenes{
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas: "titulo-examenes titulo-examenes"
+						 "nombre cargaexamen"
+						 "lectura fecha"
+						 "agregarotro agregarotro";
+}
+
+.titulo-examenes{
+	grid-area: titulo-examenes;
+	margin-bottom: 28px;
+}
+.nombre-examen{
+	grid-area: nombre;
+
+}
+
+.cargar-examen{
+	grid-area: cargaexamen;
+}
+
+.cargar-lectura{
+	grid-area: lectura;
+}
+
+.fecha-toma-examen{
+	grid-area: fecha;
+}
+
+
+.agregar-examenes h1{
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 30px;
+	letter-spacing: 0.3px;
+	font-family:'Mulish', sans-serif;
+	color: var(--main-color-rojooscuro);
+}
+
+.add-paciente-button .boton-sumit{
+	width: 350px;
+}
+
+
+.agregar-examenes h2{
+	text-align: left;
+	text-transform: uppercase;
+	margin-bottom: 6px;
+}
+
+.add-examen-button{
+	font-family:'Mulish', sans-serif;
+	color: var(--main-color-rojooscuro);
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 15px;
+	letter-spacing: 0.3px;
+	text-transform: uppercase;
+	text-decoration: none;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	margin-left: 70%;
+	grid-area: agregarotro;
+
+
+}
+
+.custom-input-file button[type=file ]{
+	background-color: var(--main-color-rojooscuro);
+	width: auto;
+    height: auto;
+    border-radius: 8px 8px;
+    color: #fff;
+    margin: 10px 10px;
+    padding: 15px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+/*Vista agregar remisor ------------------------------------------------------*/
+
+.main-contenedor-add-remisor{
+	width: 1440px;
+	height: auto;
+	margin: 20px auto 20px auto;
+}
+
+.grid-main-contenedor-add-remisor{
+
+	display: grid;
+	grid-template-columns: 25% 75%;
+}
+
+.grid-main-contenedor-add-remisor img{
+	width: 360px ;
+}
+
+.contenedor-asignar-pacientes{
+	background-color: #fff;
+	border-top-right-radius: 8px 8px;
+	margin-top: 32px;
+	padding: 42px 60px 42px 60px;
+	width: 92%;
+}
+
+.grid-contenedor-asignar-pacientes{
+	display: grid;
+	grid-template-columns: 380px auto;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas: "tituloAsignarPaciente tituloAsignarPaciente"
+						 "documentoPacienteCampo botonAsigPaciente"
+						 "alerta alerta";
+}
+
+.titulo-asiganar-paciente{
+	grid-area: tituloAsignarPaciente;
+	color: var(--main-color-rojooscuro);
+	margin-bottom: 28px;
+
+}
+
+.campo-documento-paciente{
+	grid-area: documentoPacienteCampo;
+}
+
+.position-addbutton {
+	grid-area: botonAsigPaciente;
+}
+
+.position-addbutton-alerta{
+	grid-area: alerta;
+	width: 38%;
+}
+
+.grid-contenedor-pasientes-asiganados .buscador-alert{
+	width: 38%;
+}
+
+.campo-documento-paciente .input-campo_texto{
+	width: 350px;
+	height: 42px;
+	background-color:var(--main-color-campos-formulario);
+	border-radius: 8px;
+	border: 1px solid #e0e0e4;
+	box-sizing: border-box;
+	box-shadow: 0px 3px 2px #cdced1;
+	margin-bottom: 15px;
+	outline: none;
+	padding: 5px 10px;
+	color: var(--main-color-gristextooscuro);
+}
+
+.campo-documento-paciente h2{
+	text-align: left;
+	text-transform: uppercase;
+	margin-bottom: 6px;
+}
+
+
+.titulo-pacientes-asiganados{
+	color: var(--main-color-rojooscuro);
+	margin-bottom: 28px;
+}
+
+.add-btn-remisor{
+	text-align: center;
+	margin-top: 28px;
+}
+
+
+.lista-remisores-titulo-seleccion{
+	display: grid;
+	grid-template-columns: 28% 20% 42% 10% ;
+	grid-column-gap: 8px;
+	padding: 15px 35px 15px 35px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: left;
+	z-index: 1;
+	margin-top: 15px;
+}
+
+
+.iconoEliminar{
+	color: var(--main-color-rojooscuro);
+	font-size: 18px;
+}
+
+.lista-remisores-contenido-seleccion{
+	display: grid;
+	grid-template-columns: 28% 20% 42% 10% ;
+	grid-column-gap: 10px;
+	padding: 10px 35px 10px 35px;
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+	text-align: left;
+}
+
+
+.grid-contenedor-pasientes-asiganados .input-campo_busqueda{
+	width: 350px;
+}
+
+
+/*Vista editar remisor ------------------------------------------------------*/
+
+.grid-campos-form{
+	display: grid;
+	align-items: flex-start;
+	grid-template-columns: 340px auto;
+	grid-template-rows: repeat(3, auto);
+	grid-template-areas:  "nombrecampo nombrecampo"
+			   			  "dato dato"
+			    		  "linea lapiz";
+
+}
+
+.form-campos-datos-personales hr{
+	width: 320px;
+	margin: 0;
+	grid-area: linea;
+	padding-right: 0;
+}
+
+
+.form-campos-datos-personales p{
+	margin-bottom: 0;
+	grid-area: dato;
+	color: var(--main-color-gristextooscuro);
+}
+
+
+.form-campos-datos-personales h2{
+	grid-area: nombrecampo;
+}
+
+.form-campos-datos-personales a{
+	margin-top: -10px;
+	grid-area: lapiz;
+	text-align: left;
+	color: var(--main-color-rojooscuro);
+	font-size: 18px;
+	margin-bottom: 12px;
+}
+
+
+/*Vista editar paciente ------------------------------------------------------*/
+
+.grid-contenedor-examenes-editar-pacientes{
+	display: grid;
+	grid-template-columns: 65% 30% 5%;
+	grid-template-rows: auto ;
+	margin-bottom: 25px;
+	align-content: center;
+}
+
+.grid-contenedor-examenes-editar-pacientes .titulo-editar-paciente{
+	color: var(--main-color-rojooscuro);
+}
+
+.grid-contenedor-examenes-editar-pacientes p{
+	text-align: right;
+	text-transform: uppercase;
+	color: var(--main-color-gristextooscuro);
+	font-family:'Mulish', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 20px;
+	margin-top: auto;
+}
+
+
+.grid-main-contenendor-examenes .contenedor-con-campo-eliminar{
+
+	display: grid;
+	grid-template-columns: 26% 45% 12% 12% 5%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: left;
+	z-index: 1;
+
+}
+
+.grid-main-contenendor-examenes .contenedor-examenes-resultados-campo-eliminar{
+	display: grid;
+	grid-template-columns: 26% 46% 12% 12% 4%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+
+}
+
+
+/*Vista remisor lector ------------------------------------------------------*/
+
+.contenedor-boton-editar-lecturas{
+	width: 100%;
+	display: flex;
+	justify-content: right;
+
+}
+
+
+.contenedor-boton-editar-lecturas p {
+    text-align: right;
+    text-transform: uppercase;
+    color: var(--main-color-gristextooscuro);
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: auto;
+}
+
+
+/*Vista editar lecturas--------------------*/
+
+.main-contenedor-examenes-lecturas{
+	width: 1440px;
+	height: auto;
+	margin: 25px auto 42px auto;
+
+}
+
+.grid-contenedor-lecturas{
+	display: grid;
+	grid-gap: 42px;
+	width: 99%;
+	height: auto;
+	grid-template-columns: 64% 34%;
+	grid-template-rows: auto; auto;
+
+}
+
+.grid-contenedor-add-lectura{
+	background-color: #fff;
+	border-radius: 8px;
+	padding: 30px 30px;
+	height: 300px;
+}
+
+
+.grid-contenedor-add-lectura p{
+	color: var(--main-color-grisclaro);
+	text-transform: uppercase;
+	font-family:'Mulish', sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 15px;
+	color: var(--main-color-gristexto);
+	margin-bottom: 0;
+	letter-spacing: 0.3px;
+	padding-bottom: 15px;
+}
+
+.buscador-alert p{
+	text-transform: none;
+
+}
+
+.grid-contenedor-add-lectura .buscador-alert{
+	width: 100%;
+}
+
+
+.add-btn-lectura{
+	text-align: left;
+	margin-bottom: 12px;
+}
+
+.grid-contenedor-add-lectura hr{
+	color: #e4e5e9;
+	border:1px solid;
+
+}
+
+.grid-contenedor-add-lectura .custom-input-file button[type=file ]{
+    margin: 10px 0px;
+}
+
+
+.grid-main-contenendor-examenes .contenedor-con-campo-eliminar-lectura{
+
+	display: grid;
+	grid-template-columns: 26% 40% 16% 3% 9% 6%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	color: var(--main-color-grisclaro);
+	font-family:'Mulish', sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	text-align: left;
+	z-index: 1;
+
+}
+
+.contenedor-examenes-resultados-campo-eliminar-lectura{
+	display: grid;
+	grid-template-columns: 26% 44% 11% 5% 7% 7%;
+	grid-column-gap: 10px;
+	padding: 15px 35px 15px 35px;
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px solid #DFE0EB ;
+
+}
+
+.iconoCargar-lectura{
+	color: #36c326;
+	font-size: 18px;
+	transform: rotate(180deg);
+}
+
+.nav-titulos .titulo-editarpaciente{
+	color: var(--main-color-rojooscuro);
+	margin-top: auto;
+	margin-bottom: auto;
+
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon"   href="static/images/favicon.png" type="image/png" />
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/media-queries.css">
+	<title>SD Diagnóstico Visual | Administrador-Agregar remisor</title>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+<body>
+	<header>
+		<div class="nav-principal">
+			<div class="nav-principal_contenedor">
+				<a href="#">Cerrar sesión</a>
+			</div>
+		</div>
+		<div class="nav-banner">
+			<div class="nav-grid-banner_logo">
+				<div class="grid-logo-boton">
+					<img src="static/images/logo-SD.png" alt="Logo">
+				<div class="regresar-button">
+					<div class="agregar-button">
+					<a href="vadministrador.html"><i class="icono-agregar fas fa-arrow-left"></i></a>
+					</div>
+					<a href="vadministrador.html"><p class="regresar">Regresar</p></a>
+				</div>
+				</div>
+				
+				<div class="nav-titulos">
+						<h1>Nuevo remisor</h1>
+				</div>	
+			</div>
+		</div>
+	</header>
+
+	<main class="main-contenedor-add-remisor">
+		<form action="usuarios/new" method="post">
+			<section class="grid-main-contenedor-add-remisor">
+				<img src="static/images/img-remisores.png">
+				<div class="form-add-paciente">
+					<div class="grid-form">
+							<div class="form-campos-datos-personales">
+								<div>
+									<h2>Nombre / Razón social</h2>
+									<input class="input-campo_texto" type="text" name="user">
+								</div>
+								<div>
+									<h2>Apellido</h2>
+									<input class="input-campo_texto" type="text" name="user">
+								</div>
+								<div>
+									<h2>Tipo de documento</h2>
+									<select name="tipos_documentos"  class="input-campo_texto">
+									<option value="1">Cédula</option> 
+									<option value="2">Documento de identidad</option> 
+									<option value="3">Pasaporte</option>
+									<option value="4">NIT</option> 
+									</select>
+								</div>
+								<div>
+									<h2>Contraseña</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Número de documento</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Fecha de nacimiento</h2>
+									<input class="input-campo_texto" type="date" name="">
+								</div>
+								<div>
+									<h2>Dirección consultorio</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Celular</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Correo</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+								<div>
+									<h2>Correo 2</h2>
+									<input class="input-campo_texto" type="text" name="">
+								</div>
+							</div>
+					</div>
+
+				</div>
+			</section>
+			
+		
+		<section class="contenedor-asignar-pacientes">
+			<div class="grid-contenedor-asignar-pacientes">
+				<h1 class="titulo-asiganar-paciente" >Asignar paciente</h1>
+				<div class="campo-documento-paciente">
+					<h2>Documento del paciente</h2>
+					<input class="input-campo_texto" type="text" name="">
+				</div>
+				<div class="position-addbutton add-paciente-button">
+					<button class="boton-sumit" type="text" name="password">AGREGAR PACIENTE</button>
+				</div>
+				<div class="position-addbutton-alerta buscador-alert">
+					<div>
+					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
+					</div>
+					<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+
+				</div>
+
+			</div>
+
+
+				<div class="grid-contenedor-pasientes-asiganados">
+					<h1 class="titulo-pacientes-asiganados">Pacientes asignados</h1>
+					<div class="buscador">
+						<input class="input-campo_busqueda" type="text" name="user">
+						<div class="buscador-button">
+						<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
+						</div>
+					</div>
+					<div class="buscador-alert">
+						<div>
+						<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
+						</div>
+						<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+					</div>
+
+
+					<div class="lista-pacientes-busqueda-seleccion">
+				<div class="lista-remisores-titulo-seleccion">
+					<div>FECHA CREACIÓN DEL PACIENTE</div>
+					<div>DOCUMENTO</div>
+					<div>NOMBRES Y APELLIDOS DEL PACIENTE</div>
+					<div>-</div>
+				</div>
+				{% for dato in datos %}
+				<div class="lista-remisores-contenido-seleccion">
+					<div>{{dato['creado']}}</div>
+					<div>{{dato['cedula']}}</div>
+					<div>{{dato['nombre']}} {{dato['apellido']}}</div>
+					<div>
+					<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="main-paginacion-examenes">
+					Paginacion
+				</div>
+			</div>
+
+				</div>
+
+			<div class="add-paciente-button add-btn-remisor">
+				<button class="boton-sumit" type="submit" name="password">AGREGAR REMISOR</button>
+			</div>
+				
+		</section>
+	</form>	
+		
+		
+	</main>
+
+	<footer>
+		<div class="info-contacto">
+			<p>Si tienes algún inconveniente con los resultados puedes escribirnos a <span>examenes@sdiagnosticovisual.com</span> o
+ 			llamarnos al <span>320 2579898</span></p>
+
+		</div>
+		<img class="btn-whatsapp" src="https://clientes.dongee.com/whatsapp.png" width="64" height="64" alt="Whatsapp" onclick="window.location.href='https://wa.me/573224509872?text=Hola!%20Tengo%20una%20inquietud%20con%20mis%20resultados'">
+	</footer>
+</body>
+</html>

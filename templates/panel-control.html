@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="icon"   href="images/favicon.png" type="image/png" />
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/media-queries.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/media-queries.css">
 	<title>SD Diagnóstico Visual | Administrador</title>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
@@ -19,7 +19,7 @@
 		</div>
 		<div class="nav-banner">
 			<div class="nav-grid-banner_logo">
-				<img src="images/logo-SD.png" alt="Logo">
+				<img src="static/images/logo-SD.png" alt="Logo">
 				<div class="nav-titulos">
 						<h1>Administrador</h1>
 						<div class="info-usuario">
@@ -58,12 +58,18 @@
 			</div>
 
 			<div class="lista-pacientes-busqueda-seleccion">
-				{% for dato in datos %}
 				<div class="lista-pacientes-titulo-seleccion">
 					<input type="checkbox" class="input-checkbox" name="">
 					<div>FECHA CREACIÓN PACIENTE</div>
-					<div>DOCUMENTO: {{dato['cedula']}}</div>
-					<div>NOMBRES Y APELLIDOS DEL PACIENTE {{dato['nombre']}} {{dato['apellido']}}</div>
+					<div>DOCUMENTO</div>
+					<div>NOMBRES Y APELLIDOS DEL PACIENTE</div>
+				</div>
+				{% for dato in datos %}
+				<div class="lista-pacientes-contenido-seleccion">
+					<input type="checkbox" class="input-checkbox" name="">
+					<div>{{dato['creado']}}</div>
+					<div>{{dato['cedula']}}</div>
+					<div>{{dato['nombre']}} {{dato['apellido']}}</div>
 				</div>
 				{% endfor %}
 				<div class="main-paginacion-examenes">
