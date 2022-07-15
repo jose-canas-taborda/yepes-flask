@@ -11,8 +11,11 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
-		function add_paciente(){
-			$.post("/delete/new", { cedulaMedico: "12334", cedulaPaciente: "45456" } );
+		function add_paciente(cedula_medico){
+			cedula_paciente = $("#cedula_paciente").val();
+			console.log("cedulaMedico:" + cedula_medico)
+			console.log("cedulaPaciente:" + cedula_paciente)
+			$.post("/relaciones/new", { cedulaMedico: cedula_medico, cedulaPaciente: cedula_paciente } );
 		}
 	</script>
 </head>
@@ -133,7 +136,7 @@
 					<input class="input-campo_texto" type="text" name="cedula_paciente" id="cedula_paciente">
 				</div>
 				<div class="position-addbutton add-paciente-button">
-					<button class="boton-sumit" type="button" onClick="add_paciente();">AGREGAR PACIENTE</button>
+					<button class="boton-sumit" type="button" onClick="add_paciente({{request.args.get('cedula')}})">AGREGAR PACIENTE</button>
 				</div>
 				<div class="position-addbutton-alerta buscador-alert">
 					<div>
@@ -162,23 +165,23 @@
 					</div>
 
 
-					<div class="lista-pacientes-busqueda-seleccion">
+			<div class="lista-pacientes-busqueda-seleccion">
 				<div class="lista-remisores-titulo-seleccion">
 					<div>FECHA CREACIÓN DEL PACIENTE</div>
 					<div>DOCUMENTO</div>
 					<div>NOMBRES Y APELLIDOS</div>
 					<div>-</div>
 				</div>
-				<!--
+				{% for paciente in pacientes_relacionados %}
 				<div class="lista-remisores-contenido-seleccion">
-					<div>dato['creado']</div>
-					<div>dato['cedula']</div>
-					<div>dato['nombre']dato['apellido']</div>
+					<div>{{paciente['creado']}}</div>
+					<div>{{paciente['cedula']}}</div>
+					<div>{{paciente['nombre']}} {{paciente['apellido']}}</div>
 					<div>
 					<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
 					</div>
 				</div>
-			-->
+				{% endfor %}
 				<div class="main-paginacion-examenes">
 					Paginacion
 				</div>

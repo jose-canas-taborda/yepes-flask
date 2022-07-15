@@ -57,8 +57,9 @@ def login():
 @app.route('/admin')
 def admin():
     if 'user' in session and session['rol'] == "admin":
-        remisores = Usuario.query.filter_by(rol='medico').paginate(1,5,False)
-        pacientes = Usuario.query.filter_by(rol='paciente').paginate(1,5,False)
+        remisores = Usuario.query.filter_by(rol='medico').all()#.paginate(1,5,False)
+        print(remisores)
+        pacientes = Usuario.query.filter_by(rol='paciente').all()#.paginate(1,5,False)
         return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
     else:
         return "No tiene Permisos para acceder aquí"
@@ -125,8 +126,22 @@ def vistapaciente():
 @app.route('/editar-medico')
 def updatemedico():
     if 'user' in session and session['rol'] == "admin":
-        datos_medico = Usuario.query.filter_by(cedula=session['user']).all()
-        return render_template('admineditarmedico.html',title='Editar Medico', datos=datos_medico)
+        cedula = request.args.get('cedula')
+        datos_medico = Usuario.query.filter_by(cedula=cedula).all()
+        pacientes_relaciones = Relacion.query.filter_by(cedulaMedico=cedula).all()
+        pacientes_relacionados = []
+        for relacion in pacientes_relaciones:
+            #print(relacion.cedulaPaciente)
+            paciente = Usuario.query.filter_by(cedula=relacion.cedulaPaciente).first()
+            pacientes_relacionados.append({
+                'creado': paciente.fechaCreacionUsuario,
+                'cedula': paciente.cedula,
+                'nombre': paciente.nombre,
+                'apellido': paciente.apellido
+            })
+            print(paciente.nombre)
+        print(pacientes_relacionados)
+        return render_template('admineditarmedico.html',title='Editar Medico', datos=datos_medico, pacientes_relacionados=pacientes_relacionados)
     else:
         return "No tiene Permisos para acceder aquí"
 

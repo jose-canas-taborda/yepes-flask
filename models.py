@@ -21,8 +21,6 @@ class Usuario(db.Model):
     fechaExamen = db.Column(db.String(20), nullable=True)
     lectura = db.Column(db.String(40), nullable=True)
     fechaCreacionUsuario = db.Column(db.String(20), nullable=True, default=db.func.current_date())
-    archivos = db.relationship('Archivos')
-    relacion = db.relationship('Relacion')
 
 
     def to_json(self):
@@ -48,12 +46,19 @@ class Relacion(db.Model):
     __tablename__ = 'relaciones'
     id = db.Column(db.Integer, primary_key=True)
     cedulaMedico = db.Column(db.String(10), nullable=False, unique=False)
-    cedulaPaciente = db.Column(db.String(10), db.ForeignKey('usuarios.cedula'))
+    cedulaPaciente = db.Column(db.String(10))
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'cedulaMedico': self.cedulaMedico,
+            'ceulaPaciente': self.cedulaPaciente,
+        }
 
 class Archivos(db.Model):
     __tablename__ = 'archivos'
     id = db.Column(db.Integer, primary_key=True)
-    cedulaPaciente = db.Column(db.String, db.ForeignKey('usuarios.cedula'))
+    cedulaPaciente = db.Column(db.String(10), nullable=False)
     examen = db.Column(db.String(250), nullable=True)
     lectura = db.Column(db.String(250), nullable=True)
     Fecha_examen = db.Column(db.DateTime(), nullable=True)

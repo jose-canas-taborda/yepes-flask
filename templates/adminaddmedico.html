@@ -98,70 +98,9 @@
 			
 		
 		<section class="contenedor-asignar-pacientes">
-			<div class="grid-contenedor-asignar-pacientes">
-				<h1 class="titulo-asiganar-paciente" >Asignar paciente</h1>
-				<div class="campo-documento-paciente">
-					<h2>Documento del paciente</h2>
-					<input class="input-campo_texto" type="text" name="">
-				</div>
-				<div class="position-addbutton add-paciente-button">
-					<button class="boton-sumit" type="text" name="password">AGREGAR PACIENTE</button>
-				</div>
-				<div class="position-addbutton-alerta buscador-alert">
-					<div>
-					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
-					</div>
-					<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
-
-				</div>
-
-			</div>
-
-
-				<div class="grid-contenedor-pasientes-asiganados">
-					<h1 class="titulo-pacientes-asiganados">Pacientes asignados</h1>
-					<div class="buscador">
-						<input class="input-campo_busqueda" type="text" name="user">
-						<div class="buscador-button">
-						<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
-						</div>
-					</div>
-					<div class="buscador-alert">
-						<div>
-						<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
-						</div>
-						<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
-					</div>
-
-
-					<div class="lista-pacientes-busqueda-seleccion">
-				<div class="lista-remisores-titulo-seleccion">
-					<div>FECHA CREACIÓN DEL PACIENTE</div>
-					<div>DOCUMENTO</div>
-					<div>NOMBRES Y APELLIDOS DEL PACIENTE</div>
-					<div>-</div>
-				</div>
-				{% for dato in datos %}
-				<div class="lista-remisores-contenido-seleccion">
-					<div>{{dato['creado']}}</div>
-					<div>{{dato['cedula']}}</div>
-					<div>{{dato['nombre']}} {{dato['apellido']}}</div>
-					<div>
-					<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-					</div>
-				</div>
-				{% endfor %}
-				<div class="main-paginacion-examenes">
-					Paginacion
-				</div>
-			</div>
-
-				</div>
-
 			<div class="add-paciente-button add-btn-remisor">
 				<button class="boton-sumit" type="submit" name="password">AGREGAR REMISOR</button>
 			</div>
-				
 		</section>
 	</form>	
 		
