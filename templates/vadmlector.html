@@ -50,30 +50,14 @@
 					<div>DOCUMENTO</div>
 					<div>NOMBRES Y APELLIDOS PACIENTE</div>
 				</div>
+				{% for paciente in pacientes %}
 				<div class="lista-pacientes-contenido">
-					<div>CC. 215624852</div>
-					<div>Luis Eduardo Charry</div>
+					<div>{{paciente['cedula']}}</div>
+					<div>{{paciente['nombre']}} {{paciente['apellido']}}</div>
 				</div>
-				<div class="lista-pacientes-contenido">
-					<div>CC. 215624852</div>
-					<div>Luis Eduardo Charry</div>
-				</div>
-				<div class="lista-pacientes-contenido">
-					<div>CC. 215624852</div>
-					<div>Luis Eduardo Charry</div>
-				</div>
-				<div class="lista-pacientes-contenido">
-					<div>CC. 215624852</div>
-					<div>Luis Eduardo Charry</div>
-				</div>
-				<div class="lista-pacientes-contenido">
-					<div>CC. 215624852</div>
-					<div>Luis Eduardo Charry</div>
-				</div>
-				<div class="lista-pacientes-contenido">
-					<div>CC. 215624852</div>
-					<div>Luis Eduardo Charry</div>
-				</div>
+				{% endfor %}
+				
+				
 
 				<div class="main-paginacion-examenes">
 					Paginacion

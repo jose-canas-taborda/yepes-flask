@@ -1,7 +1,9 @@
 import os
-from flask import Flask, redirect, request, url_for
+from flask import Flask, redirect, request, url_for, flash
 from flask_restful import Api, reqparse
 from flask import render_template
+#from werkzeug import secure_filename
+
 
 from flask import Flask, session
 from sqlalchemy import select
@@ -37,10 +39,6 @@ parser_logeo.add_argument('rol', location='form', type=str)
 def index():
     return render_template('login.html', title='Ingrese sus Datos')
 
-'''@app.route('/login')
-def login():
-    return render_template('login.html', title='Login')'''
-
 @app.route('/login', methods=["POST"])
 def login():
     """if request.method == "POST":
@@ -59,8 +57,8 @@ def login():
 @app.route('/admin')
 def admin():
     if 'user' in session and session['rol'] == "admin":
-        remisores = Usuario.query.filter_by(rol='medico').all()
-        pacientes = Usuario.query.filter_by(rol='paciente').all()
+        remisores = Usuario.query.filter_by(rol='medico').paginate(1,5,False)
+        pacientes = Usuario.query.filter_by(rol='paciente').paginate(1,5,False)
         return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
     else:
         return "No tiene Permisos para acceder aquí"
@@ -68,17 +66,12 @@ def admin():
 @app.route('/login-error')
 def loginError():
     session.clear()
-    #session['usuario'] = None
-    #session['password'] = None
-    #session['role'] = None
-    return "Error de login"
+    flash("Introduzca unos datos válidos")
+    return render_template('login.html', title='error')
 
-@app.route('/nuevo-usuario')
-def nuevoUsuario():
-    if 'user' in session and session['rol'] == "admin":
-        return render_template('adminaddpaciente.html', title='Nuevo usuario')
-    else:
-        return "No tiene Permisos para acceder aquí"
+@app.route('/recuperar-password')
+def recuperarpassword():
+    return render_template('recover.html', title='Recuperar Contraseña')
 
 
 @app.route('/agregar-medico')
@@ -93,7 +86,7 @@ def addpaciente():
     if 'user' in session and session['rol'] == "admin":
         return render_template('adminaddpaciente.html', title='Nuevo Paciente')
     else:
-        return "No tiene Permisos para acceder aquí"
+       return "No tiene Permisos para acceder aquí"
 
 @app.route('/editar-paciente')
 def editpaciente():

@@ -64,7 +64,7 @@
 								</div>
 								<div>
 									<h2>Número de documento</h2>
-									<input class="input-campo_texto" type="number" name="cedula" required>
+									<input class="input-campo_texto" type="text" name="cedula" required>
 								</div>
 								<div>
 									<h2>Fecha de nacimiento</h2>
@@ -76,7 +76,7 @@
 								</div>
 								<div>
 									<h2>Celular</h2>
-									<input class="input-campo_texto" type="number" name="telefono" minlength="7" maxlength="10" required>
+									<input class="input-campo_texto" type="tel" name="telefono" minlength="7" maxlength="10" required>
 								</div>
 								<div>
 									<h2>Correo</h2>
@@ -86,7 +86,7 @@
 									<h2>Correo 2</h2>
 									<input class="input-campo_texto" type="email" name="email2">
 									<input type="hidden" name="rol" value="paciente">
-									<input type="hidden" name="fechaCreacionUsuario" value="">
+									<input type="hidden" name="fechaCreacionUsuario">
 								</div>
 							</div>
 						<div class="agregar-examenes">
@@ -97,11 +97,13 @@
 							</div>
 							<div class="custom-input-file">
 								<h2>Cargar examen</h2>
-								<button type="file" >CARGAR EXAMEN</button>
+								<input class="input-campo_texto" type="file" name="URLExamen">
+
 							</div>
 							<div class="custom-input-file">
 								<h2>Cargar lectura</h2>
-								<button type="file">CARGAR LECTURA</button>
+								<input class="input-campo_texto" type="file" name="lectura">
+								
 							</div>
 							<div class="fecha-toma-examen">
 								<h2>Fecha toma del examen</h2>

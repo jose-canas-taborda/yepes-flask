@@ -38,8 +38,10 @@
 				<div class="nav-titulos">
 					<h1>Editando Remisor</h1>
 					<div class="info-usuario">
-						<p class="nombre-usuario">{{ nombre }}NOmbre Del Usuario</p>
-						<p class="doumento-usuario">{{ cedula }}Documento Usuario</p>
+						{% for dato in datos %}
+						<p class="nombre-usuario">{{ dato['nombre'] }}</p>
+						<p class="doumento-usuario">{{ dato['cedula'] }}</p>
+						{% endfor %}
 					</div>
 				</div>
 				</div>	

@@ -40,7 +40,7 @@
 					<a href="/usuarios/delete"><i class="icono-agregar fas fa-trash-alt"></i></a>
 				</div>
 				<div class="editar-button">
-					<a href="/editar-paciente"><i class="icono-agregar fas fa-pencil-alt"></i></a>
+					<a href="/usuarios/update"><i class="icono-agregar fas fa-pencil-alt"></i></a>
 				</div>
 			</div>
 			<div class="buscador">
@@ -64,7 +64,7 @@
 					<div>DOCUMENTO</div>
 					<div>NOMBRES Y APELLIDOS</div>
 				</div>
-				{% for paciente in pacientes %}
+				{% for paciente in pacientes.items %}
 				<div class="lista-pacientes-contenido-seleccion">
 					<input type="checkbox" class="input-checkbox" name="">
 					<div>{{paciente['fechaCreacionUsuario']}}</div>
@@ -115,7 +115,7 @@
 						<div>DOCUMENTO</div>
 						<div>NOMBRES Y APELLIDOS</div>
 					</div>
-					{% for remisor in remisores %}
+					{% for remisor in remisores.items %}
 					<div class="lista-pacientes-contenido-seleccion">
 						<input type="checkbox" class="input-checkbox" name="">
 						<div>{{remisor['fechaCreacionUsuario']}}</div>

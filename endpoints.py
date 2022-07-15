@@ -142,3 +142,11 @@ class AgregarArchivo(Resource):
             lectura=args['lectura'])
         db.session.add(usuario)
         db.session.commit()
+
+'''class Recovery(Resource):
+    def post(self):
+        args = parser_usuario.parse_args('email1')
+        usuario = Usuario(email1=args['email1'])
+        if usuario == args:
+
+        db.session.commit()'''

@@ -9,18 +9,21 @@ class Usuario(db.Model):
     tipoDocumento = db.Column(db.String(20), nullable=False)
     cedula = db.Column(db.String(10), nullable=False, unique=True) 
     password = db.Column(db.String(102), nullable=False) 
-    nombre = db.Column(db.String(20), nullable=False) 
-    apellido = db.Column(db.String(20), nullable=False)
+    nombre = db.Column(db.String(30), nullable=False) 
+    apellido = db.Column(db.String(30), nullable=False)
     fechaNacimiento = db.Column(db.DateTime(), nullable=False)
-    direccion = db.Column(db.String(20), nullable=False)
-    telefono = db.Column(db.Integer(), nullable=False, unique=True)
-    email1 = db.Column(db.String(20), nullable=False, unique=True)
-    email2 = db.Column(db.String(20), nullable=True)
+    direccion = db.Column(db.String(30), nullable=False)
+    telefono = db.Column(db.Numeric(10), nullable=False, unique=True)
+    email1 = db.Column(db.String(50), nullable=False, unique=True)
+    email2 = db.Column(db.String(50), nullable=True)
     rol = db.Column(db.String(20), nullable=True)
-    examen = db.Column(db.String(20), nullable=True)
-    fechaExamen = db.Column(db.DateTime(), nullable=True)
-    lectura = db.Column(db.String(20), nullable=True)
-    fechaCreacionUsuario = db.Column(db.DateTime(), nullable=True, default=db.func.current_timestamp())
+    examen = db.Column(db.String(40), nullable=True)
+    fechaExamen = db.Column(db.String(20), nullable=True)
+    lectura = db.Column(db.String(40), nullable=True)
+    fechaCreacionUsuario = db.Column(db.String(20), nullable=True, default=db.func.current_date())
+    archivos = db.relationship('Archivos')
+    relacion = db.relationship('Relacion')
+
 
     def to_json(self):
         return {
@@ -45,10 +48,12 @@ class Relacion(db.Model):
     __tablename__ = 'relaciones'
     id = db.Column(db.Integer, primary_key=True)
     cedulaMedico = db.Column(db.String(10), nullable=False, unique=False)
-    cedulaPaciente = db.Column(db.String(10), nullable=False, unique=True)
+    cedulaPaciente = db.Column(db.String(10), db.ForeignKey('usuarios.cedula'))
 
 class Archivos(db.Model):
     __tablename__ = 'archivos'
     id = db.Column(db.Integer, primary_key=True)
-    cedulaPaciente = db.Column(db.String(10), nullable=False, unique=True)
-    archivo = db.Column(db.String(250), nullable=True)
+    cedulaPaciente = db.Column(db.String, db.ForeignKey('usuarios.cedula'))
+    examen = db.Column(db.String(250), nullable=True)
+    lectura = db.Column(db.String(250), nullable=True)
+    Fecha_examen = db.Column(db.DateTime(), nullable=True)

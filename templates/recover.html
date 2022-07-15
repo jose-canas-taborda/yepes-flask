@@ -11,38 +11,22 @@
 </head>
 <body>
 	<main class="main-contenedor_loguin">
-		<form action="/autenticacion" method="post">
+		<form action="/recovery" method="post">
 			<section  class="contenedor-loguin">
 				<div class="grid-contenedor_loguin">
 					<div class="contenedor-logo">
 						<img src="static/images/logo-SD.png" alt="Logo">
 					</div>
 					<div>
-						<h1>¡Bienvenidos!</h1>
-						<p>Ingresa tu usuario y contraseña</p>
+						<h1>Recupera tu Contraseña</h1>
+						<p>Ingresa aquí el email con el que te has registrado y te enviaremos la contraseña</p>
 					</div>
 					<div>
-						<h2>Usuario</h2>
-						<input class="input-campo_texto" type="text" name="cedula">
+						<h2>Email</h2>
+						<input class="input-campo_texto" type="email" name="email1"></input>
 					</div>
-					<div>
-						<h2>Contraseña</h2>
-						<input class="input-campo_texto" type="password" name="password"></input>
-						<a href="/recuperar-password">¿Olvidaste tu contraseña?</a>
-					</div>
-					<button class="boton-sumit" type="text" name="password">INICIAR SESIÓN</button>
-					{% with messages = get_flashed_messages() %}
-					{% if messages %}				
-                    <div class="alert-log">
-						<div>
-						<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
-						</div>
-						<p>Introduzca datos válidos</p>
-					</div>
+					<button class="boton-sumit" type="text" name="password">RECUPERAR CONTRASEÑA</button>
 				</div>
-				{% endif %}
-				{% endwith %}
-
 				
 			</section>
 		</form>
