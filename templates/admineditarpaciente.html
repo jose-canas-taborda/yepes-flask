@@ -31,6 +31,12 @@
 				
 				<div class="nav-titulos">
 						<h1>Información del paciente</h1>
+						<div class="info-usuario">
+							{% for paciente in pacientes %}
+							<p class="nombre-usuario">{{ paciente['nombre'] }}</p>
+							<p class="doumento-usuario">{{ paciente['cedula'] }}</p>
+							{% endfor %}
+						</div>
 				</div>	
 			</div>
 		</div>
@@ -42,63 +48,61 @@
 				<img src="static/images/img-pacientes.png">
 				<div class="form-add-paciente">
 					<div class="grid-form">
+						{% for paciente in pacientes %}
 							<div class="form-campos-datos-personales">
 								<div class="grid-campos-form">
-									<h2>Nombre </h2>
-									<p> Luis Eduardo</p>
+									<h2>Nombre / Razón social</h2>
+									<p> {{paciente['nombre']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Apellido</h2>
-									<p> Charry Charry</p>
+									<p>{{paciente['apellido']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Tipo de documento</h2>
-									<p> C.C.</p>
+									<p> {{paciente['tipoDocumento']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Contraseña</h2>
-									<p> xxxxxxxxx</p>
+									<p> {{paciente['password']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
+									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt">static/</i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Número de documento</h2>
-									<p> 23265212</p>
+									<p> {{paciente['cedula']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Fecha de nacimiento</h2>
-									<p> 12/12/1985</p>
-									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
+									<p> {{paciente['fechaNacimiento']}}</p>
+									<hr>	
 								</div>
 								<div class="grid-campos-form">
 									<h2>Dirección consultorio</h2>
-									<p> Calle 73 # 451 - 200 Ed. Los olivos piso 8</p>
+									<p> {{paciente['direccion']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Celular</h2>
-									<p> 322156456</p>
+									<p> {{paciente['telefono']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Correo</h2>
-									<p> Educahhary@gmail.com</p>
+									<p> {{paciente['email1']}}</p>
 									<hr>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt"></i></a>
 								</div>
-								
+								<div class="grid-campos-form">
+									<h2>Correo 2</h2>
+									<p> {{paciente['enail2']}}</p>
+									<hr>
+								</div>
 							</div>
+						{% endfor %}
 					</div>
 
 				</div>

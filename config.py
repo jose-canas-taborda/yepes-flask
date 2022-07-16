@@ -3,7 +3,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql://db_user:josele@localhost/flasksdv'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:root@localhost/flasksdv'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProductionConfig(Config):

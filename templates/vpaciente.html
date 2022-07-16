@@ -22,10 +22,10 @@
 				<img src="static/images/logo-SD.png" alt="Logo">
 				<div class="nav-titulos">
 						<h1>Resultados</h1>
-						<div class="info-usuario">
-							<p class="nombre-usuario">Luis Eduardo Charry Gil</p>
-							<p class="doumento-usuario">CC. 12.236.232</p>
-						</div>
+						{% for paciente in pacientes %}
+							<p class="nombre-usuario">{{ paciente['nombre'] }}</p>
+							<p class="doumento-usuario">{{ paciente['cedula'] }}</p>
+							{% endfor %}
 				</div>	
 			</div>
 		</div>

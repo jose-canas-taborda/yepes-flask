@@ -10,6 +10,7 @@ from sqlalchemy import select
 
 from config import config
 from endpoints import *
+from models import Archivos
 
 def create_app(enviroment):
     app = Flask(__name__, static_folder='static')
@@ -57,9 +58,9 @@ def login():
 @app.route('/admin')
 def admin():
     if 'user' in session and session['rol'] == "admin":
-        remisores = Usuario.query.filter_by(rol='medico').all()#.paginate(1,5,False)
+        remisores = Usuario.query.filter_by(rol='medico').all()
         print(remisores)
-        pacientes = Usuario.query.filter_by(rol='paciente').all()#.paginate(1,5,False)
+        pacientes = Usuario.query.filter_by(rol='paciente').all()
         return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
     else:
         return "No tiene Permisos para acceder aquí"
@@ -89,12 +90,6 @@ def addpaciente():
     else:
        return "No tiene Permisos para acceder aquí"
 
-@app.route('/editar-paciente')
-def editpaciente():
-    if 'user' in session and session['rol'] == "admin":
-        return render_template('admineditarpaciente.html', title='Editar Paciente')
-    else:
-        return "No tiene Permisos para acceder aquí"
 @app.route('/medico-lector')
 def vistalector():
     if 'user' in session and session['rol'] == "admin" or "lector":
@@ -119,7 +114,18 @@ def vistamedico():
 @app.route('/paciente')
 def vistapaciente():
     if 'user' in session and session['rol'] == "admin" or "paciente":
-        return render_template('vpaciente.html', title='Panel del Paciente')
+        cedula = request.args.get('cedula')
+        datos_paciente = Usuario.query.filter_by(cedula=cedula).all()
+        return render_template('vpaciente.html', title='Panel del Paciente', pacientes=datos_paciente)
+    else:
+        return "No tiene Permisos para acceder aquí"
+
+@app.route('/editar-paciente')
+def editpaciente():
+    if 'user' in session and session['rol'] == "admin":
+        cedula = request.args.get('cedula')
+        datos_paciente = Usuario.query.filter_by(cedula=cedula).all()
+        return render_template('admineditarpaciente.html', title='Editar Paciente', pacientes=datos_paciente)
     else:
         return "No tiene Permisos para acceder aquí"
 

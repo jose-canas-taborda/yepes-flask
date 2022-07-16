@@ -45,12 +45,6 @@
 				<div class="agregar-button">
 					<a href="/agregar-paciente"><i class="icono-agregar fas fa-plus"></i></a>
 				</div>
-				<div class="eliminar-button">
-					<a href="/usuarios/delete"><i class="icono-agregar fas fa-trash-alt"></i></a>
-				</div>
-				<div class="editar-button">
-					<a href="/usuarios/update"><i class="icono-agregar fas fa-pencil-alt"></i></a>
-				</div>
 			</div>
 			<div class="buscador">
 				<input class="input-campo_busqueda" type="text" name="user">
@@ -68,17 +62,19 @@
 
 			<div class="lista-pacientes-busqueda-seleccion">
 				<div class="lista-pacientes-titulo-seleccion">
-					<input type="checkbox" class="input-checkbox" name="">
-					<div>FECHA CREACIÓN PACIENTE</div>
+					<div>FECHA CREACIÓN</div>
 					<div>DOCUMENTO</div>
 					<div>NOMBRES Y APELLIDOS</div>
+					<div>EDITAR</div>
+					<div>ELIMINAR</div>
 				</div>
 				{% for paciente in pacientes %}
 				<div class="lista-pacientes-contenido-seleccion">
-					<input type="checkbox" class="input-checkbox" name="">
 					<div>{{paciente['fechaCreacionUsuario']}}</div>
 					<div>{{paciente['cedula']}}</div>
 					<div>{{paciente['nombre']}} {{paciente['apellido']}}</div>
+					<div class="editar-buttonq"><a href="/editar-paciente?cedula={{paciente['cedula']}}"><i class="icono-agregarq fas fa-pencil-alt"></i></a></div>
+						<div class="eliminar-buttonq"><a href="javascript:delete_usuario({{paciente['id']}});"><i class="icono-agregarq fas fa-trash-alt"></i></a></div>
 				</div>
 				{% endfor %}
 				<div class="main-paginacion-examenes">
@@ -110,24 +106,20 @@
 			<div class="lista-pacientes-busqueda-seleccion">
 
 				<div class="lista-pacientes-busqueda-seleccion">
-					<div class="lista-pacientes-titulo-seleccion">
-						<div>FECHA CREACIÓN REMISOR</div>
+					<div class="lista-remisores-titulo-seleccion">
+						<div>F.	 CREACIÓN REMISOR</div>
 						<div>DOCUMENTO</div>
 						<div>NOMBRES Y APELLIDOS</div>
-						<div>
-							<div></div>
-							<div></div>
-						</div>
+						<div>EDITAR</div>
+						<div>ELIMINAR</div>
 					</div>
 					{% for remisor in remisores %}
-					<div class="lista-pacientes-contenido-seleccion">
+					<div class="lista-remisores-contenido-seleccion">
 						<div>{{remisor['fechaCreacionUsuario']}}</div>
 						<div>{{remisor['cedula']}}</div>
 						<div>{{remisor['nombre']}} {{remisor['apellido']}}</div>
-						<div>
-							<div class="editar-button"><a href="/editar-medico?cedula={{remisor['cedula']}}"><i class="icono-agregar fas fa-pencil-alt"></i></a></div>
-							<div class="eliminar-button"><a href="javascript:delete_usuario({{remisor['id']}});"><i class="icono-agregar fas fa-trash-alt"></i></a></div>
-						</div>
+						<div class="editar-buttonq"><a href="/editar-medico?cedula={{remisor['cedula']}}"><i class="icono-agregarq fas fa-pencil-alt"></i></a></div>
+						<div class="eliminar-buttonq"><a href="javascript:delete_usuario({{remisor['id']}});"><i class="icono-agregarq fas fa-trash-alt"></i></a></div>
 					</div>
 					{% endfor %}
 					<div class="main-paginacion-examenes">
