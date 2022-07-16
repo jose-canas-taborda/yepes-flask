@@ -1,4 +1,4 @@
-from flask import session, redirect
+from flask import request, session, redirect
 from models import Archivos, Relacion, db
 from flask_restful import Resource, reqparse
 
@@ -130,19 +130,14 @@ class AgregarRelacion(Resource):
         db.session.add(relacion)
         db.session.commit()
 
+
 class AgregarArchivo(Resource):
     def post(self):
         args = parser_usuario.parse_args()
         archivos = Archivos(
             cedulaPaciente=args['cedulaPaciente'], examen=args['examen'],
-            lectura=args['lectura'], Fecha_examen=args['fechaExamen'])
+            lectura=args['lectura'], Fecha_examen=args['fechaExamen'])      
         db.session.add(archivos)
         db.session.commit()
 
-'''class Recovery(Resource):
-    def post(self):
-        args = parser_usuario.parse_args('email1')
-        usuario = Usuario(email1=args['email1'])
-        if usuario == args:
 
-        db.session.commit()'''

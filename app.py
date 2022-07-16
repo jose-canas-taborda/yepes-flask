@@ -1,8 +1,10 @@
+from fileinput import filename
 import os
 from flask import Flask, redirect, request, url_for, flash
 from flask_restful import Api, reqparse
 from flask import render_template
-#from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
 
 
 from flask import Flask, session
@@ -12,11 +14,12 @@ from config import config
 from endpoints import *
 from models import Archivos
 
+
 def create_app(enviroment):
     app = Flask(__name__, static_folder='static')
+    app.config['UPLOAD_FOLDER'] = "./uploads"
     app.config.from_object(enviroment)
     app.secret_key = 'Er3z1ns0p0rt4b3!'
-    app.config['UPLOAD_FOLDER'] = "static/uploads/"
 
     with app.app_context():
         db.init_app(app)
@@ -61,6 +64,7 @@ def admin():
         remisores = Usuario.query.filter_by(rol='medico').all()
         print(remisores)
         pacientes = Usuario.query.filter_by(rol='paciente').all()
+        flash("Búsqueda sin resultados")
         return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
     else:
         return "No tiene Permisos para acceder aquí"
@@ -156,6 +160,19 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+@app.route("/uploader", methods=['POST'])
+def uploader():
+    if request.method == "POST":
+        f = request.files['examen']
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    args = parser_usuario.parse_args()
+    archivos = Archivos(
+        cedulaPaciente=args['cedulaPaciente'], examen=args['examen'],
+        lectura=args['lectura'], Fecha_examen=args['fechaExamen'])      
+    db.session.add(archivos)
+    db.session.commit()
+
 #@app.before_request
 def valida_session():
     ruta = request.path
@@ -164,6 +181,8 @@ def valida_session():
         print('valida session')
         #if 'usuario' not in session or 'password' not in session:
         #    return redirect("/login-error")
+
+
 
 api.add_resource(Autenticacion, '/autenticacion')
 api.add_resource(Usuarios, '/usuarios/')

@@ -14,11 +14,12 @@
 		function agregar_examen(){
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
-			cedula_paciente = urlParams.get('cedula');
+			//cedula_paciente = urlParams.get('cedula')
+			cedula_paciente = '1234567';
 			examen = $("#examen").val();
 			fecha_examen = $("#FechaExamen").val();
-			lectura = $("#lectura").val();
-			$.post("/uploader", { cedulaPaciente:cedula_paciente, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
+			lectura= $("#lectura").val();
+			$.post("/archivos/new", { cedulaPaciente:cedula_paciente, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
 				alert( "Examen Agregado");
 				location.reload();
 			});	
@@ -82,7 +83,8 @@
 								</div>
 								<div class="grid-campos-form">
 									<h2>Contraseña</h2>
-									<input class="input-campo_texto" type="password" name="{{paciente['password']}}" readonly>
+									<p> {{paciente['password']}}</p>
+									<hr>
 									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt">static/</i></a>
 								</div>
 								<div class="grid-campos-form">
@@ -97,30 +99,30 @@
 								</div>
 								<div class="grid-campos-form">
 									<h2>Dirección consultorio</h2>
-									<input class="input-campo_texto" type="text" placeholder="{{paciente['direccion']}}">
+									<p> {{paciente['direccion']}}</p>
+									<hr>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Celular</h2>
-									<input class="input-campo_texto" type="text" name="telefono" placeholder="{{paciente['telefono']}}">
+									<p> {{paciente['telefono']}}</p>
+									<hr>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Correo</h2>
-									<input class="input-campo_texto" type="text" name="email1" placeholder="{{paciente['email1']}}">
+									<p> {{paciente['email1']}}</p>
+									<hr>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Correo 2</h2>
-									<input class="input-campo_texto" type="text" name="email2" placeholder="{{paciente['email2']}}">
+									<p> {{paciente['enail2']}}</p>
+									<hr>
 								</div>
 							</div>
 						{% endfor %}
 					</div>
-					<div class="add-paciente-button add-btn-remisor">
-						<button class="boton-sumit" type="submit">ACTUALIZAR PACIENTE</button>
-					</div>
+
 				</div>
-				
 			</section>
-		</form>
 		
 		
 			<section class="contenedor-asignar-pacientes">
@@ -227,30 +229,35 @@
 				Paginacion
 			</div>
 
-			<form action="/uploader" method="post" enctype="multipart/form-data">
+
 			<div class="agregar-examenes">
 							<h1 class="titulo-examenes">Agregar exámenes</h1>
 							<div class="nombre-examen">
 								<h2>Cargar Exámen</h2>
-								<input class="input-campo_texto" type="file" id="examen" name="examen">
+								<input class="input-campo_texto" type="text" id="examen">
 							</div>
 							<div class="fecha-toma-examen">
 								<h2>Fecha toma del examen</h2>
-								<input class="input-campo_texto" type="date" id="FechaExamen">
+								<input class="input-campo_texto" type="date" name="" id="FechaExamen">
+							</div>
+							<div class="add-paciente-button">
+								<button name="Cargar Examen" class="boton-sumit" onclick="agregar_examen()">CARGAR</button>
 							</div>
 							<div class="custom-input-file">
 								<h2>Cargar lectura</h2>
 								<input type="file" id="lectura">
 							</div>
-							<div class="add-paciente-button">
-								<button type="button" class="boton-sumit" onClick="agregar_examen({{request.args.get('cedula')}})">ENVIAR</button>
-							</div>
-						
 							
-			</div>
-			</form>
+						</div>
+						
+
+				<div class="add-paciente-button add-btn-remisor">
+					<button class="boton-sumit" type="submit">ACTUALIZAR PACIENTE</button>
+				</div>
 					
 			</section>
+		</form>
+		
 	</main>
 
 

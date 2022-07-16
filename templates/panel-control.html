@@ -52,13 +52,17 @@
 					<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
 				</div>
 			</div>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
 			<div class="buscador-alert">
 				<div>
 					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
 				</div>
-				<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+				<p>No se encontraron datos relacionados1. Por favor inténtelo de nuevo.</p>
 
 			</div>
+			{% endif %}
+			{% endwith %}
 
 			<div class="lista-pacientes-busqueda-seleccion">
 				<div class="lista-pacientes-titulo-seleccion">
@@ -97,12 +101,17 @@
 					<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
 				</div>
 			</div>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
 			<div class="buscador-alert">
 				<div>
 					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
 				</div>
-				<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+				<p>No se encontraron datos relacionados1. Por favor inténtelo de nuevo.</p>
+
 			</div>
+			{% endif %}
+			{% endwith %}
 			<div class="lista-pacientes-busqueda-seleccion">
 
 				<div class="lista-pacientes-busqueda-seleccion">

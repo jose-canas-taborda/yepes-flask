@@ -13,8 +13,6 @@
 	<script type="text/javascript">
 		function add_paciente(cedula_medico){
 			cedula_paciente = $("#cedula_paciente").val();
-			console.log("cedulaMedico:" + cedula_medico)
-			console.log("cedulaPaciente:" + cedula_paciente)
 			$.post("/relaciones/new", { cedulaMedico: cedula_medico, cedulaPaciente: cedula_paciente } );
 		}
 	</script>

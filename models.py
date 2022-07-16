@@ -7,13 +7,13 @@ class Usuario(db.Model):
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     tipoDocumento = db.Column(db.String(20), nullable=False)
-    cedula = db.Column(db.String(10), nullable=False, unique=True) 
+    cedula = db.Column(db.String(50), nullable=False, unique=True) 
     password = db.Column(db.String(102), nullable=False) 
     nombre = db.Column(db.String(30), nullable=False) 
     apellido = db.Column(db.String(30), nullable=False)
     fechaNacimiento = db.Column(db.DateTime(), nullable=False)
-    direccion = db.Column(db.String(30), nullable=False)
-    telefono = db.Column(db.Numeric(10), nullable=False)
+    direccion = db.Column(db.String(50), nullable=False)
+    telefono = db.Column(db.Numeric(65), nullable=False)
     email1 = db.Column(db.String(50), nullable=False, unique=True)
     email2 = db.Column(db.String(50), nullable=True)
     rol = db.Column(db.String(20), nullable=True)
@@ -45,8 +45,8 @@ class Usuario(db.Model):
 class Relacion(db.Model):
     __tablename__ = 'relaciones'
     id = db.Column(db.Integer, primary_key=True)
-    cedulaMedico = db.Column(db.String(10), nullable=False, unique=False)
-    cedulaPaciente = db.Column(db.String(10))
+    cedulaMedico = db.Column(db.String(50), nullable=False, unique=False)
+    cedulaPaciente = db.Column(db.String(50))
 
     def to_json(self):
         return {
@@ -58,7 +58,7 @@ class Relacion(db.Model):
 class Archivos(db.Model):
     __tablename__ = 'archivos'
     id = db.Column(db.Integer, primary_key=True)
-    cedulaPaciente = db.Column(db.String(10), nullable=False)
+    cedulaPaciente = db.Column(db.String(50), nullable=False)
     examen = db.Column(db.String(250), nullable=True)
     lectura = db.Column(db.String(250), nullable=True)
     Fecha_examen = db.Column(db.DateTime(), nullable=True)
