@@ -9,6 +9,21 @@
 	<link rel="stylesheet" type="text/css" href="static/css/media-queries.css">
 	<title>SD Diagnóstico Visual | Administrador-Editar paciente</title>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		function agregar_examen(){
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			cedula_paciente = urlParams.get('cedula')
+			examen = 'url/archivo/asdao.jpg';
+			fecha_examen = '2022-07-15';
+			lectura = 'xxxxxxx';
+			$.post("/archivos/new", { cedulaPaciente:cedula_paciente, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
+				alert( "Examen Agregado");
+				location.reload();
+			});	
+		}
+	</script>
 </head>
 <body>
 	<header>
@@ -220,9 +235,9 @@
 								<h2>Nombre del examen</h2>
 								<input class="input-campo_texto" type="text" name="">
 							</div>
-							<div class="custom-input-file">
+							<div class="add-paciente-button">
 								<h2>Cargar examen</h2>
-								<button type="file">CARGAR EXAMEN</button>
+								<input type="button" class="boton-sumit" name="Cargar Examen" value="boton" onclick="agregar_examen()" />
 							</div>
 							<div class="custom-input-file">
 								<h2>Cargar lectura</h2>
