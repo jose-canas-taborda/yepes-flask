@@ -59,6 +59,7 @@ class Archivos(db.Model):
     __tablename__ = 'archivos'
     id = db.Column(db.Integer, primary_key=True)
     cedulaPaciente = db.Column(db.String(50), nullable=False)
+    nombreExamen = db.Column(db.String(250), nullable=True)
     examen = db.Column(db.String(250), nullable=True)
     lectura = db.Column(db.String(250), nullable=True)
     Fecha_examen = db.Column(db.DateTime(), nullable=True)

@@ -136,8 +136,9 @@ class AgregarArchivo(Resource):
         args = parser_usuario.parse_args()
         archivos = Archivos(
             cedulaPaciente=args['cedulaPaciente'], examen=args['examen'],
-            lectura=args['lectura'], Fecha_examen=args['fechaExamen'])      
+            lectura=args['lectura'], Fecha_examen=args['fechaExamen'], Nombre_Examen=args['nombreExamen'])      
         db.session.add(archivos)
         db.session.commit()
+        return redirect(url_for('/uploader'))
 
 

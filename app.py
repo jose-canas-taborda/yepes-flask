@@ -62,7 +62,6 @@ def login():
 def admin():
     if 'user' in session and session['rol'] == "admin":
         remisores = Usuario.query.filter_by(rol='medico').all()
-        print(remisores)
         pacientes = Usuario.query.filter_by(rol='paciente').all()
         flash("Búsqueda sin resultados")
         return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
@@ -129,7 +128,8 @@ def editpaciente():
     if 'user' in session and session['rol'] == "admin":
         cedula = request.args.get('cedula')
         datos_paciente = Usuario.query.filter_by(cedula=cedula).all()
-        return render_template('admineditarpaciente.html', title='Editar Paciente', pacientes=datos_paciente)
+        archivos = Archivos.query.filter_by(cedulaPaciente=cedula).all()
+        return render_template('admineditarpaciente.html', title='Editar Paciente', pacientes=datos_paciente, examenes=archivos)
     else:
         return "No tiene Permisos para acceder aquí"
 
@@ -159,19 +159,6 @@ def updatemedico():
 def logout():
     session.clear()
     return redirect(url_for('index'))
-
-@app.route("/uploader", methods=['POST'])
-def uploader():
-    if request.method == "POST":
-        f = request.files['examen']
-        filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    args = parser_usuario.parse_args()
-    archivos = Archivos(
-        cedulaPaciente=args['cedulaPaciente'], examen=args['examen'],
-        lectura=args['lectura'], Fecha_examen=args['fechaExamen'])      
-    db.session.add(archivos)
-    db.session.commit()
 
 #@app.before_request
 def valida_session():

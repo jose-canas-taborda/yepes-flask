@@ -16,9 +16,10 @@
 			const urlParams = new URLSearchParams(queryString);
 			cedula_paciente = urlParams.get('cedula');
 			examen = $("#examen").val();
+			NombreExamen = $("#nombreExamen").val();
 			fecha_examen = $("#FechaExamen").val();
 			lectura = $("#lectura").val();
-			$.post("/uploader", { cedulaPaciente:cedula_paciente, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
+			$.post("/usuarios/update", { cedulaPaciente:cedula_paciente, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
 				alert( "Examen Agregado");
 				location.reload();
 			});	
@@ -142,11 +143,12 @@
 					<div>LECTURA</div>
 					<div>-</div>
 				</div>
+				{% for e in examenes %}
 				<div class="contenedor-examenes-resultados-campo-eliminar">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
+					<div>{{e['Fecha_examen']}}</div>
+					<div>{{e['examen']}}</div>
 					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
+						<a href="{{e['examen']}}"><i class="iconoDescarga fas fa-download"></i></a>
 					</div>
 					<div>
 						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
@@ -155,82 +157,27 @@
 						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
 					</div>
 				</div>
-				<div class="contenedor-examenes-resultados-campo-eliminar">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-					</div>
-				</div>
-				<div class="contenedor-examenes-resultados-campo-eliminar">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-					<div>
-						
-					</div>
-					<div>
-						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-					</div>
-				</div>
-				<div class="contenedor-examenes-resultados-campo-eliminar">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-					</div>
-				</div>
-				<div class="contenedor-examenes-resultados-campo-eliminar">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-					<div>
-						
-					</div>
-					<div>
-						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-					</div>
-				</div>
-				<div class="contenedor-examenes-resultados-campo-eliminar">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-					</div>
-				</div>
+				{% endfor %}
+				
+				
+				
+				
+				
 
-				</div>
+			</div>
 
 			<div class="main-paginacion-examenes">
 				Paginacion
 			</div>
 
-			<form action="/uploader" method="post" enctype="multipart/form-data">
+			<form action="usuarios/update
+			7
+			" method="post" enctype="multipart/form-data">
 			<div class="agregar-examenes">
 							<h1 class="titulo-examenes">Agregar exámenes</h1>
 							<div class="nombre-examen">
+								<h2>Nombre del Exámen</h2>
+								<input class="input-campo_texto" type="text" id="nombreExamen" name="nombreExamen">
 								<h2>Cargar Exámen</h2>
 								<input class="input-campo_texto" type="file" id="examen" name="examen">
 							</div>
