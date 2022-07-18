@@ -24,6 +24,7 @@ parser_usuario.add_argument('email2', location='form', type=str)
 parser_usuario.add_argument('rol', location='form', type=str)
 parser_usuario.add_argument('examen', location='form', type=str)
 parser_usuario.add_argument('fechaExamen', location='form', type=str)
+parser_usuario.add_argument('nombreExamen', location='form', type=str)
 parser_usuario.add_argument('lectura', location='form', type=str)
 parser_usuario.add_argument('fechaCreacionUsuario', location='form', type=str)
 
@@ -136,9 +137,7 @@ class AgregarArchivo(Resource):
         args = parser_usuario.parse_args()
         archivos = Archivos(
             cedulaPaciente=args['cedulaPaciente'], examen=args['examen'],
-            lectura=args['lectura'], Fecha_examen=args['fechaExamen'], Nombre_Examen=args['nombreExamen'])      
+            lectura=args['lectura'], Fecha_examen=args['fechaExamen'], nombreExamen=args['examen'])      
         db.session.add(archivos)
         db.session.commit()
-        return redirect(url_for('/uploader'))
-
 

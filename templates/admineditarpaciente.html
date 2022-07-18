@@ -16,10 +16,10 @@
 			const urlParams = new URLSearchParams(queryString);
 			cedula_paciente = urlParams.get('cedula');
 			examen = $("#examen").val();
-			NombreExamen = $("#nombreExamen").val();
+			nombre_examen = $("#nombreExamen").val();
 			fecha_examen = $("#FechaExamen").val();
 			lectura = $("#lectura").val();
-			$.post("/usuarios/update", { cedulaPaciente:cedula_paciente, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
+			$.post("/archivos/new", { cedulaPaciente:cedula_paciente, nombreExamen:nombre_examen, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
 				alert( "Examen Agregado");
 				location.reload();
 			});	
