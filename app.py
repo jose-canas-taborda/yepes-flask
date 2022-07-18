@@ -1,8 +1,9 @@
-from fileinput import filename
 import os
 from flask import Flask, redirect, request, url_for, flash
 from flask_restful import Api, reqparse
 from flask import render_template
+
+from fileinput import filename
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 
@@ -16,8 +17,10 @@ from models import Archivos
 
 
 def create_app(enviroment):
+    UPLOAD_FOLDER = os.path.abspath("./static/uploads/")
+    print(UPLOAD_FOLDER)
     app = Flask(__name__, static_folder='static')
-    app.config['UPLOAD_FOLDER'] = "./uploads"
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config.from_object(enviroment)
     app.secret_key = 'Er3z1ns0p0rt4b3!'
 
@@ -171,6 +174,16 @@ def valida_session():
         #    return redirect("/login-error")
 
 
+@app.route("/uploader", methods=['POST'])
+def uploader():
+    if request.method == "POST":
+        print(request.files)
+        f = request.files['examen']
+        print(f.filename)
+        filename = secure_filename(f.filename)
+        print(filename, app.config['UPLOAD_FOLDER'])
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('admin'))
 
 api.add_resource(Autenticacion, '/autenticacion')
 api.add_resource(Usuarios, '/usuarios/')
