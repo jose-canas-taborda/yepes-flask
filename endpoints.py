@@ -108,6 +108,30 @@ class DeleteUsuario(Resource):
             response = {'usuario_info': 'Usuario with id {} deleted'.format(args['id'])}, 201
         return response
 
+class DeleteRelacion(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        relacion = Relacion.query.get(args['id'])
+        if relacion is None:
+            response = {'usuario_info': 'Relacion not found'}, 201
+        else:
+            db.session.delete(relacion)
+            db.session.commit()
+            response = {'usuario_info': 'Relacion with id {} deleted'.format(args['id'])}, 201
+        return response
+
+class DeleteArchivo(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        archivo = Archivos.query.get(args['id'])
+        if archivo is None:
+            response = {'usuario_info': 'Archivo not found'}, 201
+        else:
+            db.session.delete(archivo)
+            db.session.commit()
+            response = {'usuario_info': 'Archivo with id {} deleted'.format(args['id'])}, 201
+        return response
+
 class UpdateUsuario(Resource):
     def post(self):
         args = parser_usuario.parse_args()
@@ -137,7 +161,20 @@ class AgregarArchivo(Resource):
         args = parser_usuario.parse_args()
         archivos = Archivos(
             cedulaPaciente=args['cedulaPaciente'], examen=args['examen'],
-            lectura=args['lectura'], Fecha_examen=args['fechaExamen'], nombreExamen=args['examen'])      
+            lectura=args['lectura'], Fecha_examen=args['fechaExamen'], nombreExamen=args['nombreExamen'])      
         db.session.add(archivos)
         db.session.commit()
 
+class AgregarArchivoLectura(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        lectura = Archivos.query.get(args['id'])
+        if lectura is None:
+            response = {'usuario_info': 'Lectura not found'}, 201
+        else:
+            lectura.nombre = args['nombre']
+            lectura.apellido = args['apellido']
+            db.session.commit()
+            lectura_json = lectura.to_json()
+            response = {'usuario_info': lectura_json}, 201
+        return response

@@ -179,7 +179,9 @@ api.add_resource(DeleteUsuario, '/usuarios/delete')
 api.add_resource(UpdateUsuario, '/usuarios/update')
 
 api.add_resource(AgregarRelacion, '/relaciones/new')
+api.add_resource(DeleteRelacion, '/relaciones/delete')
 api.add_resource(AgregarArchivo, '/archivos/new')
+api.add_resource(DeleteArchivo, '/archivos/delete')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

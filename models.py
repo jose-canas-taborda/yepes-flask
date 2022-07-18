@@ -17,9 +17,6 @@ class Usuario(db.Model):
     email1 = db.Column(db.String(50), nullable=False, unique=True)
     email2 = db.Column(db.String(50), nullable=True)
     rol = db.Column(db.String(20), nullable=True)
-    examen = db.Column(db.String(40), nullable=True)
-    fechaExamen = db.Column(db.String(20), nullable=True)
-    lectura = db.Column(db.String(40), nullable=True)
     fechaCreacionUsuario = db.Column(db.String(20), nullable=True, default=db.func.current_date())
 
 
@@ -36,9 +33,7 @@ class Usuario(db.Model):
             'email1': self.email1,
             'email2': self.email2,
             'rol': self.rol,
-            'creado': self.fechaCreacionUsuario,
-            'examen': self.examen,
-            'lectura': self.lectura,
+            #'creado': self.fechaCreacionUsuario,
 
         }
 

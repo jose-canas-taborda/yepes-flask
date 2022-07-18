@@ -17,10 +17,18 @@
 			cedula_paciente = urlParams.get('cedula');
 			examen = $("#examen").val();
 			nombre_examen = $("#nombreExamen").val();
+			alert(nombre_examen);
 			fecha_examen = $("#FechaExamen").val();
 			lectura = $("#lectura").val();
 			$.post("/archivos/new", { cedulaPaciente:cedula_paciente, nombreExamen:nombre_examen, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
 				alert( "Examen Agregado");
+				location.reload();
+			});	
+		}
+
+		function delete_archivo(id_archivo) {
+			$.post("/archivos/delete", { id: id_archivo } ).done(function( data ) {
+				alert( "Archivo Borrado");
 				location.reload();
 			});	
 		}
@@ -146,7 +154,7 @@
 				{% for e in examenes %}
 				<div class="contenedor-examenes-resultados-campo-eliminar">
 					<div>{{e['Fecha_examen']}}</div>
-					<div>{{e['examen']}}</div>
+					<div>{{e['nombreExamen']}}</div>
 					<div>
 						<a href="{{e['examen']}}"><i class="iconoDescarga fas fa-download"></i></a>
 					</div>
@@ -154,7 +162,7 @@
 						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
 					</div>
 					<div>
-						<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
+						<a href="javascript:delete_archivo({{e['id']}})"><i class="iconoEliminar fas fa-trash-alt"></i></a>
 					</div>
 				</div>
 				{% endfor %}
