@@ -144,6 +144,7 @@ def updatemedico():
             #print(relacion.cedulaPaciente)
             paciente = Usuario.query.filter_by(cedula=relacion.cedulaPaciente).first()
             pacientes_relacionados.append({
+                'id': relacion.id,
                 'creado': paciente.fechaCreacionUsuario,
                 'cedula': paciente.cedula,
                 'nombre': paciente.nombre,

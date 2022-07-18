@@ -150,10 +150,15 @@ class UpdateUsuario(Resource):
 class AgregarRelacion(Resource):
     def post(self):
         args = parser_usuario.parse_args()
-        relacion = Relacion(
-            cedulaMedico=args['cedulaMedico'], cedulaPaciente=args['cedulaPaciente'])
-        db.session.add(relacion)
-        db.session.commit()
+        relaciones = Relacion.query.filter_by(cedulaPaciente=args['cedulaPaciente']).all()
+        if relaciones:
+            return "Error: Relacion existente"
+        else:
+            relacion = Relacion(
+                cedulaMedico=args['cedulaMedico'], cedulaPaciente=args['cedulaPaciente'])
+            db.session.add(relacion)
+            db.session.commit()
+            return "Relacion creada"
 
 
 class AgregarArchivo(Resource):

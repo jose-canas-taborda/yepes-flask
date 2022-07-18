@@ -13,7 +13,18 @@
 	<script type="text/javascript">
 		function add_paciente(cedula_medico){
 			cedula_paciente = $("#cedula_paciente").val();
-			$.post("/relaciones/new", { cedulaMedico: cedula_medico, cedulaPaciente: cedula_paciente } );
+			$.post("/relaciones/new", { cedulaMedico: cedula_medico, cedulaPaciente: cedula_paciente } ).done(function( data ) {
+				// data devuelve el valor de return en el ednpoint AgregaRelacion
+				alert(data);
+				location.reload();
+			});	
+		}
+
+		function delete_relacion(id_relacion) {
+			$.post("/relaciones/delete", { id: id_relacion } ).done(function( data ) {
+				alert( "Relacion Borrada");
+				location.reload();
+			});	
 		}
 	</script>
 </head>
@@ -166,7 +177,7 @@
 					<div>{{paciente['cedula']}}</div>
 					<div>{{paciente['nombre']}} {{paciente['apellido']}}</div>
 					<div>
-					<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
+					<a href="javascript:delete_relacion({{paciente['id']}});"><i class="iconoEliminar fas fa-trash-alt"></i></a>
 					</div>
 				</div>
 				{% endfor %}
