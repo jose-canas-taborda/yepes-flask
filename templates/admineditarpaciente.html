@@ -10,47 +10,6 @@
 	<title>SD Diagnóstico Visual | Administrador-Editar paciente</title>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript">
-		function agregar_examen(){
-			//save_archivo();
-			const queryString = window.location.search;
-			const urlParams = new URLSearchParams(queryString);
-			cedula_paciente = urlParams.get('cedula');
-			nombre_examen = $("#nombreExamen").val();
-			examen = $("#examen").val();
-			fecha_examen = $("#FechaExamen").val();
-			lectura = $("#lectura").val();
-			$.post("/archivos/new", { cedulaPaciente:cedula_paciente, nombreExamen:nombre_examen, examen:examen, fechaExamen:fecha_examen, lectura:lectura  } ).done(function( data ) {
-				alert( "Examen Agregado");
-				save_archivo();
-			});
-		}
-		function save_archivo() {
-			var data = new FormData(jQuery('form')[1]);
-			console.log(data);
-
-			jQuery.ajax({
-				url: '/uploader',
-				data: data,
-				cache: false,
-				contentType: 'multipart/form-data',
-				processData: false,
-				method: 'POST',
-				type: 'POST', // For jQuery < 1.9
-				success: function(data){
-					alert(data);
-					location.reload();
-				}
-			});
-		}
-
-
-		function delete_archivo(id_archivo) {
-			$.post("/archivos/delete", { id: id_archivo } ).done(function( data ) {
-				alert( "Archivo Borrado");
-			});	
-		}
-	</script>
 </head>
 <body>
 	<header>
@@ -94,49 +53,43 @@
 							<div class="form-campos-datos-personales">
 								<div class="grid-campos-form">
 									<h2>Nombre / Razón social</h2>
-									<p> {{paciente['nombre']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{paciente['nombre']}}" name="nombre">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Apellido</h2>
-									<p>{{paciente['apellido']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{paciente['apellido']}}" name="apellido">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Tipo de documento</h2>
-									<p> {{paciente['tipoDocumento']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{paciente['tipoDocumento']}}" name="tipoDocumento">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Contraseña</h2>
-									<input class="input-campo_texto" type="password" name="{{paciente['password']}}" readonly>
-									<a href="#"><i class="icono-editar-solo fas fa-pencil-alt">static/</i></a>
+									<input class="input-campo_texto" type="password" value="{{paciente['password']}}" readonly>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Número de documento</h2>
-									<p> {{paciente['cedula']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{paciente['cedula']}}" name="cedula" readonly>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Fecha de nacimiento</h2>
-									<p> {{paciente['fechaNacimiento']}}</p>
-									<hr>	
+									<input class="input-campo_texto" type="text" value="{{paciente['fechaNacimiento']}}" name="fechaNacimiento">
 								</div>
 								<div class="grid-campos-form">
-									<h2>Dirección consultorio</h2>
-									<input class="input-campo_texto" type="text" placeholder="{{paciente['direccion']}}">
+									<h2>Dirección</h2>
+									<input class="input-campo_texto" type="text" value="{{paciente['direccion']}}" name="direccion">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Celular</h2>
-									<input class="input-campo_texto" type="text" name="telefono" placeholder="{{paciente['telefono']}}">
+									<input class="input-campo_texto" type="tel" name="telefono" value="{{paciente['telefono']}}">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Correo</h2>
-									<input class="input-campo_texto" type="text" name="email1" placeholder="{{paciente['email1']}}">
+									<input class="input-campo_texto" type="email" name="email1" value="{{paciente['email1']}}">
 								</div>
 								<div class="grid-campos-form">
-									<h2>Correo 2</h2>
-									<input class="input-campo_texto" type="text" name="email2" placeholder="{{paciente['email2']}}">
+									<input class="input-campo_texto" type="hidden" name="id" placeholder="{{paciente['id']}}">
+									<input class="input-campo_texto" type="hidden" name="rol" value="paciente">
 								</div>
 							</div>
 						{% endfor %}
@@ -151,36 +104,33 @@
 		
 		
 			<section class="contenedor-asignar-pacientes">
-				<div class="grid-contenedor-examenes-editar-pacientes">
-					<h1 class="titulo-editar-paciente" >Exámenes</h1>
-					<p>Editar lecturas</p>
-					<div class="editar-button">
-						<a href="/editar-lectura"><i class="icono-agregar fas fa-pencil-alt"></i></a>
-					</div>
-
-				</div>
-
-				<div class="grid-main-contenendor-examenes">
+			<div class="grid-main-contenendor-examenes">
 
 				<div class="contenedor-con-campo-eliminar">
 					<div>FECHA TOMA DEL EXAMEN</div>
 					<div>NOMBRE DEL EXAMEN</div>
 					<div>RESULTADO</div>
 					<div>LECTURA</div>
-					<div>-</div>
+					<div>ELIMINAR</div>
+					<div>EDITAR</div>
 				</div>
 				{% for e in examenes %}
 				<div class="contenedor-examenes-resultados-campo-eliminar">
 					<div>{{e['Fecha_examen']}}</div>
 					<div>{{e['nombreExamen']}}</div>
 					<div>
-						<a href="{{e['examen']}}"><i class="iconoDescarga fas fa-download"></i></a>
+						<a href="{{ url_for('download_file', name=e['examen']) }}" target="_blank"><i class="iconoDescarga fas fa-download"></i></a>
 					</div>
 					<div>
-						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
+						<a href="{{ url_for('download_file', name=e['lectura']) }}">
+							<i class="iconoDescarga-lectura fas fa-download"></i>
+						</a>
 					</div>
 					<div>
-						<a href="javascript:delete_archivo({{e['id']}})"><i class="iconoEliminar fas fa-trash-alt"></i></a>
+						<a href="/delete-examen?examen={{ e['id'] }}"><i class="iconoEliminar fas fa-trash-alt"></i></a>
+					</div>
+					<div>
+						<a href="/editar-lectura?examen={{ e['id'] }}"><i class="iconoEditar fas fa-pencil-alt"></i></a>
 					</div>
 				</div>
 				{% endfor %}
@@ -198,26 +148,25 @@
 
 			<form action="/uploader" method="post" enctype="multipart/form-data" name="fileinfo">
 				<div class="agregar-examenes">
-								<h1 class="titulo-examenes">Agregar exámenes</h1>
-								<div class="nombre-examen">
-									<h2>Nombre del Exámen</h2>
-									<input class="input-campo_texto" type="text" id="nombreExamen" name="nombreExamen">
-									<h2>Cargar Exámen</h2>
-									<input class="input-campo_texto" type="file" id="examen" name="examen">
-								</div>
-								<div class="fecha-toma-examen">
-									<h2>Fecha toma del examen</h2>
-									<input class="input-campo_texto" type="date" id="FechaExamen">
-								</div>
-								<div class="custom-input-file">
-									<h2>Cargar lectura</h2>
-									<input type="file" id="lectura">
-								</div>
-								<div class="add-paciente-button">
-									<button type="button" class="boton-sumit" onClick="agregar_examen({{request.args.get('cedula')}})">ENVIAR</button>
-								</div>
-							
-								
+					<h1 class="titulo-examenes">Agregar exámenes</h1>
+					<div class="nombre-examen">
+						<h2>Nombre del Exámen</h2>
+						<input class="input-campo_texto" type="text" id="nombreExamen" name="nombreExamen">
+						<h2>Cargar Exámen</h2>
+						<input class="input-campo_texto" type="file" id="examen" name="examen">
+					</div>
+					<div class="fecha-toma-examen">
+						<h2>Fecha toma del examen</h2>
+						<input class="input-campo_texto" type="date" id="FechaExamen" name="FechaExamen">
+					</div>
+					<div class="custom-input-file">
+						<h2>Cargar lectura</h2>
+						<input type="file" id="lectura" name="lectura">
+					</div>
+					<input type="hidden" name="cedula" id="cedula" value="{{ cedula }}">
+					<div class="add-paciente-button">
+						<button type="submit" class="boton-sumit">ENVIAR</button>
+					</div>	
 				</div>
 			</form>
 					

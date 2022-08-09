@@ -32,8 +32,10 @@
 					<div class="nav-titulos cuadre-titulos">
 						<h1 class="titulo-editarpaciente">Exámenes del paciente / Editar lecturas de: </h1>
 						<div class="info-usuario">
-							<p class="nombre-usuario">Patricia Cortes Corredor</p>
-							<p class="doumento-usuario">CC. 1001</p>
+							{% for paciente in pacientes %}
+							<p class="nombre-usuario">{{ paciente['nombre'] }}</p>
+							<p class="doumento-usuario">{{ paciente['cedula'] }}</p>
+							{% endfor %}
 						</div>
 					</div>	
 
@@ -42,143 +44,57 @@
 		</header>
 
 		<main class="main-contenedor-examenes-lecturas">
-		<form action="usuarios/new" method="post">
+		
 			<section class="grid-contenedor-lecturas"> 
 
 
 				<div class="grid-main-contenendor-examenes">
 
-					<div class="contenedor-con-campo-eliminar-lectura">
+					<div class="veditarlectura">
 						<div>FECHA TOMA DEL EXAMEN</div>
 						<div>NOMBRE DEL EXAMEN</div>
 						<div>RESULTADO</div>
-						<div>-</div>
 						<div>LECTURA</div>
-						<div>-</div>
 					</div>
 					<div class="contenedor-examenes-resultados-campo-eliminar-lectura">
-						<div>Marzo 26 de 2022</div>
-						<div>Examen general óptico cornea ojo izquierdo</div>
+						<div>{{ archivo.Fecha_examen }}</div>
+						<div>{{ archivo.nombreExamen }}</div>
 						<div>
-							<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
+							<a href="{{ archivo.examen }}" target="_blank"><i class="iconoDescarga fas fa-download"></i></a>
 						</div>
-						<input type="checkbox" class="input-checkbox" name="">
+						
 						<div>
+							{% if archivo.lectura != "" %}
 							<a href="#"><i class="iconoCargar-lectura fas fa-download"></i></a>
+							{% endif %}
 						</div>
+						
 						<div>
 							<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
 						</div>
-					</div>
-					
-					<div class="contenedor-examenes-resultados-campo-eliminar-lectura">
-						<div>Marzo 26 de 2022</div>
-						<div>Examen general óptico cornea ojo izquierdo</div>
-						<div>
-							<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-						</div>
-						<input type="checkbox" class="input-checkbox" name="">
-						<div>
-							<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
-						</div>
-						<div>
-							<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-						</div>
-					</div>
-
-					<div class="contenedor-examenes-resultados-campo-eliminar-lectura">
-						<div>Marzo 26 de 2022</div>
-						<div>Examen general óptico cornea ojo izquierdo</div>
-						<div>
-							<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-						</div>
-						<input type="checkbox" class="input-checkbox" name="">
-						<div>
-							<a href="#"></i></a>
-						</div>
-						<div>
-							<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-						</div>
-					</div>
-
-					<div class="contenedor-examenes-resultados-campo-eliminar-lectura">
-						<div>Marzo 26 de 2022</div>
-						<div>Examen general óptico cornea ojo izquierdo</div>
-						<div>
-							<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-						</div>
-						<input type="checkbox" class="input-checkbox" name="">
-						<div>
-							<a href="#"><i class="iconoCargar-lectura fas fa-download"></i></a>
-						</div>
-						<div>
-							<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-						</div>
-					</div>
-
-					<div class="contenedor-examenes-resultados-campo-eliminar-lectura">
-						<div>Marzo 26 de 2022</div>
-						<div>Examen general óptico cornea ojo izquierdo</div>
-						<div>
-							<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-						</div>
-						<input type="checkbox" class="input-checkbox" name="">
-						<div>
-							<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
-						</div>
-						<div>
-							<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-						</div>
-					</div>
-
-					<div class="contenedor-examenes-resultados-campo-eliminar-lectura">
-						<div>Marzo 26 de 2022</div>
-						<div>Examen general óptico cornea ojo izquierdo</div>
-						<div>
-							<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-						</div>
-						<input type="checkbox" class="input-checkbox" name="">
-						<div>
-							<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
-						</div>
-						<div>
-							<a href="#"><i class="iconoEliminar fas fa-trash-alt"></i></a>
-						</div>
-					</div>
-
-
-					<div class="main-paginacion-examenes">
-					Paginacion
 					</div>
 
 				</div>
-
+				<form action="/addlectura" method="post" enctype="multipart/form-data" name="fileinfo">
 				<div class="grid-contenedor-add-lectura">
 					<p>Se cargará la lectura para el examen:</p>
-					<div> Marzo 26 de 2022  -  Examen general optico</div>
+					<div><h3>{{ archivo.nombreExamen }}</h3></div>
 					<hr>
 					<div class="agregar-examenes">
 						
 						<div class="custom-input-file">
 							<h2>Cargar lectura</h2>
-  							<button type="file">CARGAR LECTURA</button>
+							<input type="file" id="lectura" name="lectura">
 						</div>
 					</div>
 					<div class="add-paciente-button add-btn-lectura">
 						<button class="boton-sumit" type="submit">ACTUALIZAR LECTURA</button>
 					</div>
-					<div class="buscador-alert">
-						<div>
-						<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
-						</div>
-						<p>No se logró cargar el archivo. Por favor inténtelo de nuevo.</p>
-
-					</div>
 				</div>
+				</form>
 
 		
 			</section>
-		</form>
 
 		</main>
 

@@ -22,9 +22,9 @@
 				<img src="static/images/logo-SD.png" alt="Logo">
 				<div class="nav-titulos">
 						<h1>Resultados</h1>
-						{% for paciente in pacientes %}
-							<p class="nombre-usuario">{{ paciente['nombre'] }}</p>
-							<p class="doumento-usuario">{{ paciente['cedula'] }}</p>
+							{% for paciente in pacientes %}
+							<p class="nombre-usuario">{{ paciente['nombre'] }} {{ paciente['apellido'] }}</p>
+							<p class="doumento-usuario">{{ paciente['tipoDocumento'] }}: {{ paciente['cedula'] }}</p>
 							{% endfor %}
 				</div>	
 			</div>
@@ -40,59 +40,18 @@
 				<div>RESULTADO</div>
 				<div>LECTURA</div>
 			</div>
+			{% for e in examenes %}
 			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico cornea ojo izquierdo</div>
+				<div>{{e['Fecha_examen']}}</div>
+				<div>{{e['nombreExamen']}}</div>
 				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
+					<a href="{{ url_for('download_file', name=e['examen']) }}"><i class="iconoDescarga fas fa-download"></i></a>
 				</div>
 				<div>
-					<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
+					<a href="{{ url_for('download_file', name=e['lectura']) }}"><i class="iconoDescarga-lectura fas fa-download"></i></a>
 				</div>
 			</div>
-			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico</div>
-				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-				</div>
-			</div>
-			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico cornea ojo derecho</div>
-				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-				</div>
-			</div>
-			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico cornea ojo derecho</div>
-				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-				</div>
-			</div>
-			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico</div>
-				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-				</div>
-			</div>	
-			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico</div>
-				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-				</div>
-			</div>	
-			<div class="contenedor-examenes-resultados">
-				<div>Marzo 26 de 2022</div>
-				<div>Examen general óptico</div>
-				<div>
-					<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-				</div>
-			</div>	
-
+			{% endfor %}
 		</div>
 
 		<div class="main-paginacion-examenes">

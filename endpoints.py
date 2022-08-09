@@ -13,6 +13,7 @@ parser_usuario.add_argument('password', location='form', type=str)
 
 # de nuevo usuario
 parser_usuario.add_argument('id', location='form', type=str)
+parser_usuario.add_argument('id_usuarios', location='form', type=str)
 parser_usuario.add_argument('tipoDocumento', location='form', type=str)
 parser_usuario.add_argument('nombre', location='form', type=str)
 parser_usuario.add_argument('apellido', location='form', type=str)
@@ -50,10 +51,10 @@ class Autenticacion(Resource):
                 return redirect("/medico-lector")
 
             if session['rol'] == 'medico':
-                return redirect("/medico")
+                return redirect("/medico?cedula={}".format(cedula))
 
             if session['rol'] == 'paciente':
-                return redirect("/paciente")
+                return redirect("/paciente?cedula={}".format(cedula))
             
             print("loginInfo:")
             print(login_json['rol'])
@@ -86,8 +87,7 @@ class NewUsuario(Resource):
             password=args['password'], nombre=args['nombre'], apellido=args['apellido'],
             fechaNacimiento=args['fechaNacimiento'], direccion=args['direccion'], 
             telefono=args['telefono'], email1=args['email1'], email2=args['email2'], 
-            rol=args['rol'], examen=args['examen'], fechaExamen=args['fechaExamen'],
-            lectura=args['lectura'])
+            rol=args['rol'])
         db.session.add(usuario)
         db.session.commit()
         # despues de guardar los datos redirecciona al panel para ver los usuarios creados
@@ -107,6 +107,25 @@ class DeleteUsuario(Resource):
             db.session.commit()
             response = {'usuario_info': 'Usuario with id {} deleted'.format(args['id'])}, 201
         return response
+
+class DeleteVariosUsuarios(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        response = ""
+        usuarios = args['id_usuarios'].tolist()
+        print(args['id_usuarios'])
+        for usuario in usuarios:
+            usuarioDel = Usuario.query.get(usuario.id)
+
+            if usuarioDel is None:
+                response = "Usuario No encontrado"
+            else:
+                db.session.delete(usuarioDel)
+                db.session.commit()
+                response = "Usuario con ID: {}".format(usuarioDel.id)
+
+            print(response)
+        return "Usuarios Eliminados"
 
 class DeleteRelacion(Resource):
     def post(self):
@@ -135,16 +154,28 @@ class DeleteArchivo(Resource):
 class UpdateUsuario(Resource):
     def post(self):
         args = parser_usuario.parse_args()
-        usuario = Usuario.query.get(args['id'])
+        usuario = Usuario.query.filter_by(cedula=args['cedula']).first()
         if usuario is None:
-            response = {'usuario_info': 'Usuario not found'}, 201
+            response = {'usuario_info': 'No se encuentra ese Número (cédula) de usuario'}, 201
         else:
             usuario.nombre = args['nombre']
             usuario.apellido = args['apellido']
+            usuario.tipoDocumento = args['tipoDocumento']
+            usuario.fechaNacimiento = args['fechaNacimiento']
+            usuario.telefono = args['telefono']
+            usuario.direccion = args['direccion']
+            usuario.email1 = args['email1']
+            usuario.email2 = args['email2']
+            usuario.rol = args['rol']
             db.session.commit()
             usuarios_json = usuario.to_json()
             response = {'usuario_info': usuarios_json}, 201
-        return response
+        if  usuario.rol == "paciente":
+            return redirect("/editar-paciente?cedula={}".format(usuario.cedula))
+        else:
+            return redirect("/editar-medico?cedula={}".format(usuario.cedula))
+
+
 
 
 class AgregarRelacion(Resource):
@@ -152,7 +183,7 @@ class AgregarRelacion(Resource):
         args = parser_usuario.parse_args()
         relaciones = Relacion.query.filter_by(cedulaPaciente=args['cedulaPaciente']).all()
         if relaciones:
-            return "Error: Relacion existente"
+            return "Error: El paciente ya está asignado a un médico."
         else:
             relacion = Relacion(
                 cedulaMedico=args['cedulaMedico'], cedulaPaciente=args['cedulaPaciente'])
@@ -184,3 +215,19 @@ class AgregarArchivoLectura(Resource):
             lectura_json = lectura.to_json()
             response = {'usuario_info': lectura_json}, 201
         return response
+
+
+class UpdateArchivo(Resource):
+    def post(self):
+        args = parser_usuario.parse_args()
+        lectura = Archivos.query.get(args['id'])
+        if lectura is None:
+            response = {'usuario_info': 'Lectura not found'}, 201
+        else:
+            lectura.nombre = args['nombre']
+            lectura.fecha = args['Fecha_examen']
+            db.session.commit()
+            lectura_json = lectura.to_json()
+            response = {'usuario_info': lectura_json}, 201
+        return response
+

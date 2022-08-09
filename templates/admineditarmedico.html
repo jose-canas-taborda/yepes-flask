@@ -71,58 +71,51 @@
 							<div class="form-campos-datos-personales">
 								<div class="grid-campos-form">
 									<h2>Nombre / Razón social</h2>
-									<p> {{dato['nombre']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{dato['nombre']}}" name="nombre">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Apellido</h2>
-									<p> {{dato['apellido']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{dato['apellido']}}" name="apellido">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Tipo de documento</h2>
-									<p> {{dato['tipoDocumento']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{dato['tipoDocumento']}}" name="tipoDocumento">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Contraseña</h2>
-									<p> {{dato['password']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="password" value="{{dato['password']}}" readonly>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Número de documento</h2>
-									<p> {{dato['cedula', readonly]}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{dato['cedula']}}" name="cedula" readonly>
 								</div>
 								<div class="grid-campos-form">
 									<h2>Fecha de nacimiento</h2>
-									<p> {{dato['fechaNacimiento']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{dato['fechaNacimiento']}}" name="fechaNacimiento">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Dirección consultorio</h2>
-									<p> {{dato['direccion']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="text" value="{{dato['direccion']}}" name="direccion">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Celular</h2>
-									<p> {{dato['telefono']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="tel" name="telefono" value="{{dato['telefono']}}">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Correo</h2>
-									<p> {{dato['email1']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="email" name="email1" value="{{dato['email1']}}">
 								</div>
 								<div class="grid-campos-form">
 									<h2>Correo 2</h2>
-									<p> {{dato['enail2']}}</p>
-									<hr>
+									<input class="input-campo_texto" type="email" name="email2" value="{{dato['email2']}}">
+									<input class="input-campo_texto" type="hidden" name="rol" value="medico">
 								</div>
 							</div>
 							{% endfor %}
 					</div>
-
+					<div class="add-paciente-button add-btn-remisor">
+						<button class="boton-sumit" type="submit">ACTUALIZAR REMISOR</button>
+					</div>
 				</div>
 			</section>
 		</form>
@@ -132,18 +125,24 @@
 				<h1 class="titulo-asiganar-paciente" >Asignar paciente</h1>
 				<div class="campo-documento-paciente">
 					<h2>Documento del paciente</h2>
-					<input class="input-campo_texto" type="text" name="cedula_paciente" id="cedula_paciente">
+					<input class="input-campo_texto" type="text" name="cedula_paciente" id="cedula_paciente" required>
 				</div>
 				<div class="position-addbutton add-paciente-button">
 					<button class="boton-sumit" type="button" onClick="add_paciente({{request.args.get('cedula')}})">AGREGAR PACIENTE</button>
 				</div>
+				{% with messages = get_flashed_messages(category_filter=["pacientes"]) %}
+				{% if messages %}
+				{% for message in messages %}
 				<div class="position-addbutton-alerta buscador-alert">
 					<div>
 					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
 					</div>
-					<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+					<p>{{ message }}</p>
 
 				</div>
+				{% endfor %}
+				{% endif %}
+				{% endwith %}
 
 			</div>
 
@@ -156,12 +155,19 @@
 						<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
 						</div>
 					</div>
-					<div class="buscador-alert">
+					{% with messages = get_flashed_messages(category_filter=["pacientes"]) %}
+					{% if messages %}
+					{% for message in messages %}
+					<div class="position-addbutton-alerta buscador-alert">
 						<div>
 						<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
 						</div>
-						<p>No se encontraron datos relacionados. Por favor inténtelo de nuevo.</p>
+						<p>{{ message }}</p>
+
 					</div>
+					{% endfor %}
+					{% endif %}
+					{% endwith %}
 
 
 			<div class="lista-pacientes-busqueda-seleccion">

@@ -11,9 +11,9 @@ class Usuario(db.Model):
     password = db.Column(db.String(102), nullable=False) 
     nombre = db.Column(db.String(30), nullable=False) 
     apellido = db.Column(db.String(30), nullable=False)
-    fechaNacimiento = db.Column(db.DateTime(), nullable=False)
+    fechaNacimiento = db.Column(db.String(20), nullable=False)
     direccion = db.Column(db.String(50), nullable=False)
-    telefono = db.Column(db.Numeric(65), nullable=False)
+    telefono = db.Column(db.String(65), nullable=False)
     email1 = db.Column(db.String(50), nullable=False, unique=True)
     email2 = db.Column(db.String(50), nullable=True)
     rol = db.Column(db.String(20), nullable=True)
@@ -23,17 +23,17 @@ class Usuario(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'tipo Documento': self.tipoDocumento,
+            'tipoDocumento': self.tipoDocumento,
             'cedula': self.cedula,
             'nombre': self.nombre,
             'apellido': self.apellido,
-            #'fecha Nacimiento': self.fechaNacimiento,
+            'fecha Nacimiento': str(self.fechaNacimiento),
             'direccion': self.direccion,
             'telefono': self.telefono,
             'email1': self.email1,
             'email2': self.email2,
             'rol': self.rol,
-            #'creado': self.fechaCreacionUsuario,
+            'creado': str(self.fechaCreacionUsuario),
 
         }
 
@@ -57,4 +57,4 @@ class Archivos(db.Model):
     nombreExamen = db.Column(db.String(250), nullable=True)
     examen = db.Column(db.String(250), nullable=True)
     lectura = db.Column(db.String(250), nullable=True)
-    Fecha_examen = db.Column(db.DateTime(), nullable=True)
+    Fecha_examen = db.Column(db.String(20), nullable=True)

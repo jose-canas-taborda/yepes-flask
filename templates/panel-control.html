@@ -17,6 +17,15 @@
 				location.href = '/admin'
 			});
 		}
+		function delete_pacientes(){
+			var pacientesDel = new Array();
+			var pacientesSeleccionados = $('.PacientesDel').map((_,paciente) => ( paciente.checked == true ? paciente.value : null )).get()
+			$.post("/usuarios/delete_varios", { id_usuarios:pacientesSeleccionados } ).done(function( data ) {
+				alert( data);
+				//location.href = '/admin'
+			});
+	
+		}
 	</script>
 </head>
 <body>
@@ -45,28 +54,39 @@
 				<div class="agregar-button">
 					<a href="/agregar-paciente"><i class="icono-agregar fas fa-plus"></i></a>
 				</div>
-			</div>
-			<div class="buscador">
-				<input class="input-campo_busqueda" type="text" name="user">
-				<div class="buscador-button">
-					<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
+				<div class="eliminar-button">
+					<a href="javascript:delete_pacientes();"><i class="icono-agregar fas fa-trash-alt"></i></a>
 				</div>
 			</div>
-			{% with messages = get_flashed_messages() %}
+			<form action="/admin" method="get">
+				<div class="buscador">
+					<input class="input-campo_busqueda" type="text" name="paciente" id="paciente">
+					<div class="buscador-button">
+						<button type="submit"><i class="iconoBuscar fas fa-search"></i></button>
+					</div>
+				</div>
+			</form>
+			<form action="/admin" method="get">
+				<button type="submit" class="agregar-button">Borrar busqueda</button>
+			</form>
+			<br>
+			{% with messages = get_flashed_messages(category_filter=["pacientes"]) %}
 			{% if messages %}
 			<div class="buscador-alert">
 				<div>
 					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
 				</div>
-				<p>No se encontraron datos relacionados1. Por favor inténtelo de nuevo.</p>
-
+					{% for message in messages %}
+					<p>{{ message }}</p>
+					{% endfor %}
 			</div>
 			{% endif %}
 			{% endwith %}
 
 			<div class="lista-pacientes-busqueda-seleccion">
 				<div class="lista-pacientes-titulo-seleccion">
-					<div>FECHA CREACIÓN</div>
+					<div></div>
+					<div>F. CREACIÓN</div>
 					<div>DOCUMENTO</div>
 					<div>NOMBRES Y APELLIDOS</div>
 					<div>EDITAR</div>
@@ -74,6 +94,7 @@
 				</div>
 				{% for paciente in pacientes %}
 				<div class="lista-pacientes-contenido-seleccion">
+					<div><input type="checkbox" class="PacientesDel" value="{{paciente['id']}}"></div>
 					<div>{{paciente['fechaCreacionUsuario']}}</div>
 					<div>{{paciente['cedula']}}</div>
 					<div>{{paciente['nombre']}} {{paciente['apellido']}}</div>
@@ -81,9 +102,6 @@
 						<div class="eliminar-buttonq"><a href="javascript:delete_usuario({{paciente['id']}});"><i class="icono-agregarq fas fa-trash-alt"></i></a></div>
 				</div>
 				{% endfor %}
-				<div class="main-paginacion-examenes">
-					Paginacion
-				</div>
 			</div>
 		</section>
 		
@@ -95,20 +113,27 @@
 					<a href="/agregar-medico"><i class="icono-agregar fas fa-plus"></i></a>
 				</div>
 			</div>
-			<div class="buscador">
-				<input class="input-campo_busqueda" type="text" name="user">
-				<div class="buscador-button">
-					<a href="#"><i class="iconoBuscar fas fa-search"></i></a>
+			<form action="/admin" method="get">
+				<div class="buscador">
+					<input class="input-campo_busqueda" type="text" name="remisor" id="remisor">
+					<div class="buscador-button">
+						<button type="submit"><i class="iconoBuscar fas fa-search"></i></button>
+					</div>
 				</div>
-			</div>
-			{% with messages = get_flashed_messages() %}
+			</form>
+			<form action="/admin" method="get">
+				<button type="submit" class="agregar-button">Borrar busqueda</button>
+			</form>
+			<br>
+			{% with messages = get_flashed_messages(category_filter=["medicos"]) %}
 			{% if messages %}
 			<div class="buscador-alert">
 				<div>
 					<a href="#"><i class="iconoAlerta fas fa-times-circle"></i></a>
 				</div>
-				<p>No se encontraron datos relacionados1. Por favor inténtelo de nuevo.</p>
-
+					{% for message in messages %}
+					<p>{{ message }}</p>
+					{% endfor %}
 			</div>
 			{% endif %}
 			{% endwith %}
@@ -116,7 +141,8 @@
 
 				<div class="lista-pacientes-busqueda-seleccion">
 					<div class="lista-remisores-titulo-seleccion">
-						<div>F.	 CREACIÓN REMISOR</div>
+						<div></div>
+						<div>F.	 CREACIÓN</div>
 						<div>DOCUMENTO</div>
 						<div>NOMBRES Y APELLIDOS</div>
 						<div>EDITAR</div>
@@ -124,6 +150,7 @@
 					</div>
 					{% for remisor in remisores %}
 					<div class="lista-remisores-contenido-seleccion">
+						<div><input type="checkbox"></div>
 						<div>{{remisor['fechaCreacionUsuario']}}</div>
 						<div>{{remisor['cedula']}}</div>
 						<div>{{remisor['nombre']}} {{remisor['apellido']}}</div>
@@ -131,13 +158,15 @@
 						<div class="eliminar-buttonq"><a href="javascript:delete_usuario({{remisor['id']}});"><i class="icono-agregarq fas fa-trash-alt"></i></a></div>
 					</div>
 					{% endfor %}
-					<div class="main-paginacion-examenes">
-						Paginacion
-					</div>
+					
 			</div>
 		</section>
 	</main>
-
+<section>
+	<div class="main-paginacion-examenes">
+		<a href="{{ pacientes.items }}">paginacion</a>
+	</div>
+</section>
 	<footer>
 		<div class="info-contacto">
 			<p>Si tienes algún inconveniente con los resultados puedes escribirnos a <span>examenes@sdiagnosticovisual.com</span> o
