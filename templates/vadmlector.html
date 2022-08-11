@@ -9,6 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="static/css/media-queries.css">
 	<title>SD Diagnóstico Visual | Remisor</title>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		/*function listar_examenes(id_usuario){
+			$.get("/archivos/get/" + id_usuario).done(function( data ) {
+				console.log(data)
+			});
+		}*/
+	</script>
 </head>
 <body>
 	<header>
@@ -20,6 +28,12 @@
 		<div class="nav-banner">
 			<div class="nav-grid-banner_logo">
 				<img src="static/images/logo-SD.png" alt="Logo">
+				<div class="regresar-button">
+				<div class="agregar-button">
+					<a href="/medico-lector"><i class="icono-agregar fas fa-arrow-left"></i></a>
+					</div>
+					<a href="/medico-lector"><p class="regresar">Regresar</p></a>
+				</div>
 				<div class="nav-titulos">
 						<h1>Pacientes</h1>
 						<div class="info-usuario">
@@ -58,7 +72,7 @@
 				{% for paciente in pacientes %}
 				<div class="lista-pacientes-contenido">
 					<div>{{paciente['cedula']}}</div>
-					<div><a href="#">{{paciente['nombre']}} {{paciente['apellido']}}</a></div>
+					<div><a href="medico-lector?paciente={{paciente['cedula']}}">{{paciente['nombre']}} {{paciente['apellido']}}</a></div>
 				</div>
 				{% endfor %}
 				
@@ -87,32 +101,15 @@
 					<div>RESU</div>
 					<div>LECT</div>
 				</div>
+				{% for archivo in archivos %}
 				<div class="contenedor-examenes-resultados">
 					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo izquierdo</div>
+					<div><a href="editar-lectura?examen={{archivo.id}}">{{archivo.nombreExamen}}</a></div>
 					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-					<div>
-						<a href="#"><i class="iconoDescarga-lectura fas fa-download"></i></a>
+						<a href="./static/media/{{archivo.examen}}" target="_blank"><i class="iconoDescarga fas fa-download"></i></a>
 					</div>
 				</div>
-				<div class="contenedor-examenes-resultados">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-				</div>
-				<div class="contenedor-examenes-resultados">
-					<div>Marzo 26 de 2022</div>
-					<div>Examen general óptico cornea ojo derecho</div>
-					<div>
-						<a href="#"><i class="iconoDescarga fas fa-download"></i></a>
-					</div>
-				</div>
-				
-
+				{% endfor %}
 				<div class="main-paginacion-examenes">
 				Paginacion
 				</div>

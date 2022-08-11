@@ -98,7 +98,9 @@ def vistalector():
     if 'user' in session and session['rol'] == "admin" or "lector":
         paciente_cedula = request.args.get('paciente', None)
         remisor_cedula = request.args.get('remisor', None)
-        if paciente_cedula: 
+        archivos = []
+        if paciente_cedula:
+            archivos = Archivos.query.filter_by(cedulaPaciente=paciente_cedula).all()
             pacientes = Usuario.query.filter_by(rol='paciente', cedula=paciente_cedula).paginate(1,5,error_out=False)
         else:
             pacientes = Usuario.query.filter_by(rol='paciente').paginate(1,5,error_out=False)
@@ -112,7 +114,7 @@ def vistalector():
         if remisores.total == 0:
             flash("Búsqueda sin resultados", 'medicos')
             
-        return render_template('vadmlector.html', title='Admin', remisores=remisores.items, pacientes=pacientes.items)
+        return render_template('vadmlector.html', title='Admin', remisores=remisores.items, pacientes=pacientes.items, archivos=archivos)
     else:
         return "No tiene Permisos para acceder aquí"
 
@@ -272,6 +274,8 @@ api.add_resource(UpdateUsuario, '/usuarios/update')
 
 api.add_resource(AgregarRelacion, '/relaciones/new')
 api.add_resource(DeleteRelacion, '/relaciones/delete')
+api.add_resource(ListaArchivos, '/archivos/')
+api.add_resource(GetUsuarioArchivos, '/archivos/get/<string:cedula_paciente>')
 api.add_resource(AgregarArchivo, '/archivos/new')
 api.add_resource(DeleteArchivo, '/archivos/delete')
 api.add_resource(UpdateArchivo, '/archivos/update')

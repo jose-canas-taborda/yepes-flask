@@ -191,6 +191,20 @@ class AgregarRelacion(Resource):
             db.session.commit()
             return "Relacion creada"
 
+class ListaArchivos(Resource):
+    def get(self):
+        archivos = Archivos.query.all()
+        archivos_json = [archivo.to_json() for archivo in archivos]
+        response = {'archivos_info': archivos_json}, 201
+        return  response
+
+class GetUsuarioArchivos(Resource):
+    def get(self, cedula_paciente):
+        args = parser_usuario.parse_args()
+        archivos = Archivos.query.filter_by(cedulaPaciente=cedula_paciente).all()
+        archivos_json = [archivo.to_json() for archivo in archivos]
+        response = {'archivos_info': archivos_json}, 201
+        return  response
 
 class AgregarArchivo(Resource):
     def post(self):

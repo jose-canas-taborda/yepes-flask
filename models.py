@@ -58,3 +58,12 @@ class Archivos(db.Model):
     examen = db.Column(db.String(250), nullable=True)
     lectura = db.Column(db.String(250), nullable=True)
     Fecha_examen = db.Column(db.String(20), nullable=True)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'cedulaPaciente': self.cedulaPaciente,
+            'nombreExamen': self.nombreExamen,
+            'examen': self.examen,
+            'lectura': self.lectura,
+        }
