@@ -79,7 +79,9 @@
 				
 
 				<div class="main-paginacion-examenes">
-					Paginacion
+					{% if archivos.has_prev %}
+					<a href="{{ url_for('vistalector', page=archivos.prev_num) }}"><<< Paginacion</a>
+					{% endif %}
 				</div>
 			</div>
 
@@ -101,7 +103,7 @@
 					<div>RESU</div>
 					<div>LECT</div>
 				</div>
-				{% for archivo in archivos %}
+				{% for archivo in archivos.items %}
 				<div class="contenedor-examenes-resultados">
 					<div>Marzo 26 de 2022</div>
 					<div><a href="editar-lectura?examen={{archivo.id}}">{{archivo.nombreExamen}}</a></div>
@@ -111,7 +113,9 @@
 				</div>
 				{% endfor %}
 				<div class="main-paginacion-examenes">
-				Paginacion
+					{% if archivos.has_next %}
+						<a href="{{ url_for('vistalector', page=archivos.next_num) }}"> >>>Paginacion</a>
+					{% endif %}
 				</div>
 
 			</div>

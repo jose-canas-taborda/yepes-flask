@@ -49,7 +49,7 @@ def admin():
     if 'user' in session and session['rol'] == "admin":
         paciente_cedula = request.args.get('paciente', None)
         remisor_cedula = request.args.get('remisor', None)
-        #page = int(request.args.get('page', 1))
+        page = int(request.args.get('page', 1))
         if paciente_cedula: 
             pacientes = Usuario.query.filter_by(rol='paciente', cedula=paciente_cedula).paginate(1,1,error_out=False)
         else:
@@ -98,10 +98,12 @@ def vistalector():
     if 'user' in session and session['rol'] == "admin" or "lector":
         paciente_cedula = request.args.get('paciente', None)
         remisor_cedula = request.args.get('remisor', None)
+        page = int(request.args.get('page', 1))
+        tamano_page = 1 # cantidad de elementos en cada page de la paginacion
         archivos = []
         if paciente_cedula:
-            archivos = Archivos.query.filter_by(cedulaPaciente=paciente_cedula).all()
-            pacientes = Usuario.query.filter_by(rol='paciente', cedula=paciente_cedula).paginate(1,5,error_out=False)
+            archivos = Archivos.query.filter_by(cedulaPaciente=paciente_cedula).paginate(page,tamano_page,error_out=False)
+            pacientes = Usuario.query.filter_by(rol='paciente', cedula=paciente_cedula).paginate(page,5,error_out=False)
         else:
             pacientes = Usuario.query.filter_by(rol='paciente').paginate(1,5,error_out=False)
         if remisor_cedula:
@@ -274,7 +276,6 @@ api.add_resource(UpdateUsuario, '/usuarios/update')
 
 api.add_resource(AgregarRelacion, '/relaciones/new')
 api.add_resource(DeleteRelacion, '/relaciones/delete')
-api.add_resource(ListaArchivos, '/archivos/')
 api.add_resource(GetUsuarioArchivos, '/archivos/get/<string:cedula_paciente>')
 api.add_resource(AgregarArchivo, '/archivos/new')
 api.add_resource(DeleteArchivo, '/archivos/delete')
