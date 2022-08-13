@@ -92,7 +92,7 @@
 					<div>EDITAR</div>
 					<div>ELIMINAR</div>
 				</div>
-				{% for paciente in pacientes %}
+				{% for paciente in pacientes.items %}
 				<div class="lista-pacientes-contenido-seleccion">
 					<div><input type="checkbox" class="PacientesDel" value="{{paciente['id']}}"></div>
 					<div>{{paciente['fechaCreacionUsuario']}}</div>
@@ -102,6 +102,16 @@
 						<div class="eliminar-buttonq"><a href="javascript:delete_usuario({{paciente['id']}});"><i class="icono-agregarq fas fa-trash-alt"></i></a></div>
 				</div>
 				{% endfor %}
+				<div>
+					{% if pacientes.has_prev %}
+						<a href="{{ url_for('admin', page=pacientes.prev_num) }}"><<< Atras</a>
+					{% endif %}
+				</div>
+				<div>					
+					{% if pacientes.has_next %}
+						<a href="{{ url_for('admin', page=pacientes.next_num) }}">Siguiente >>></a>
+					{% endif %}
+				</div>
 			</div>
 		</section>
 		
@@ -113,7 +123,7 @@
 					<a href="/agregar-medico"><i class="icono-agregar fas fa-plus"></i></a>
 				</div>
 			</div>
-			<form action="/admin" method="get">
+			<form action="/admin" method="post">
 				<div class="buscador">
 					<input class="input-campo_busqueda" type="text" name="remisor" id="remisor">
 					<div class="buscador-button">
@@ -148,7 +158,7 @@
 						<div>EDITAR</div>
 						<div>ELIMINAR</div>
 					</div>
-					{% for remisor in remisores %}
+					{% for remisor in remisores.items %}
 					<div class="lista-remisores-contenido-seleccion">
 						<div><input type="checkbox"></div>
 						<div>{{remisor['fechaCreacionUsuario']}}</div>
@@ -158,7 +168,16 @@
 						<div class="eliminar-buttonq"><a href="javascript:delete_usuario({{remisor['id']}});"><i class="icono-agregarq fas fa-trash-alt"></i></a></div>
 					</div>
 					{% endfor %}
-					
+					<div>
+						{% if remisores.has_prev %}
+							<a href="{{ url_for('admin', page=remisores.prev_num) }}"><<< Atras</a>
+						{% endif %}
+					</div>
+					<div>					
+						{% if remisores.has_next %}
+							<a href="{{ url_for('admin', page=remisores.next_num) }}">Siguiente >>></a>
+						{% endif %}
+					</div>
 			</div>
 		</section>
 	</main>

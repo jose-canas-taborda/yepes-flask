@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, request, url_for, flash, render_template, send_from_directory, session
+from flask import Flask, jsonify, redirect, request, url_for, flash, render_template, send_from_directory, session
 from flask_restful import Api, reqparse
 
 from fileinput import filename
@@ -44,27 +44,34 @@ def index():
     return render_template('login.html', title='Ingrese sus Datos')
 
 
-@app.route('/admin', )
+@app.route('/admin')
 def admin():
     if 'user' in session and session['rol'] == "admin":
         paciente_cedula = request.args.get('paciente', None)
+        print(paciente_cedula)
         remisor_cedula = request.args.get('remisor', None)
         page = int(request.args.get('page', 1))
-        if paciente_cedula: 
-            pacientes = Usuario.query.filter_by(rol='paciente', cedula=paciente_cedula).paginate(1,1,error_out=False)
+        tamano_page = int(2)
+        remisores = Usuario.query.filter_by(rol='medico').paginate(page, tamano_page, error_out=False)
+
+        if paciente_cedula:
+            pacientes = Usuario.query.filter_by(rol='paciente', cedula=paciente_cedula).paginate(1,1, error_out=False)
         else:
-            pacientes = Usuario.query.filter_by(rol='paciente').paginate(1,1,error_out=False)
+            pacientes = Usuario.query.filter_by(rol='paciente').paginate(page, tamano_page, error_out=False)
+
         if remisor_cedula:
-            remisores = Usuario.query.filter_by(rol='medico', cedula=remisor_cedula).paginate(1,1,error_out=False)
+            remisores = Usuario.query.filter_by(
+                rol='medico', cedula=remisor_cedula).paginate(page, tamano_page, error_out=False)
         else:
-            remisores = Usuario.query.filter_by(rol='medico').paginate(1,1,error_out=False)
+            remisores = Usuario.query.filter_by(
+                rol='medico').paginate(page, tamano_page, error_out=False)
 
         if pacientes.total == 0:
             flash("Búsqueda sin resultados", 'pacientes')
         if remisores.total == 0:
             flash("Búsqueda sin resultados", 'medicos')
-            
-        return render_template('panel-control.html', title='Admin', remisores=remisores.items, pacientes=pacientes.items)
+    
+        return render_template('panel-control.html', title='Admin', remisores=remisores, pacientes=pacientes)
     else:
         return "No tiene Permisos para acceder aquí"
 
